@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import AnimatorPanel from "../../components/AnimatorPanel.jsx";
 import styles from "./LaPosteScenario.module.css";
 
@@ -36,10 +37,10 @@ const INDICES = [
 // -- Composant ----------------------------------------------------------------
 
 export default function LaPosteScenario() {
+  const navigate = useNavigate();
+
   function handleCtaClick() {
-    alert(
-      "📌 Astuce animateur : en vrai, ce bouton mènerait vers un faux site de paiement. On en reparlera !",
-    );
+    navigate("/laposte/paiement");
   }
 
   return (
