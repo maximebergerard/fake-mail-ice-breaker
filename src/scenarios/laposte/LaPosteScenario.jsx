@@ -108,7 +108,9 @@ export default function LaPosteScenario() {
                 <div className={styles.unreadDot} />
                 La Poste - Service Client
               </div>
-              <span className={styles.mailDateSmall}>Aujourd'hui, {mailTime}</span>
+              <span className={styles.mailDateSmall}>
+                Aujourd'hui, {mailTime}
+              </span>
             </div>
             <div className={styles.mailSubjectSmall}>
               ⚠️ Action requise : votre colis en attente
@@ -121,7 +123,7 @@ export default function LaPosteScenario() {
           {/* Mails lus (décor) */}
           <div className={styles.mailItem}>
             <div className={styles.mailSender}>
-              Mairie de Savigny
+              Mairie de Nandy
               <span className={styles.mailDateSmall}>Hier</span>
             </div>
             <div className={styles.mailSubjectSmall}>
@@ -187,7 +189,8 @@ export default function LaPosteScenario() {
               <div className={styles.emailBody}>
                 <div className={styles.emailAlertBox}>
                   <strong>
-                    ⚠️ Votre colis est en attente - Action requise avant {deadline}
+                    ⚠️ Votre colis est en attente - Action requise avant{" "}
+                    {deadline}
                   </strong>
                   Un problème a été détecté lors de la livraison de votre colis.
                   Un règlement de <strong>2,49 €</strong> est nécessaire pour
