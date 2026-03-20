@@ -2,6 +2,23 @@ import { useNavigate } from "react-router-dom";
 import AnimatorPanel from "../../components/AnimatorPanel.jsx";
 import styles from "./LaPosteScenario.module.css";
 
+// -- Utilitaires horaires -----------------------------------------------------
+
+// Heure actuelle - 2 min, format "HH:MM" (ex: "09:43")
+function getMailTime() {
+  const d = new Date(Date.now() - 2 * 60 * 1000);
+  return `${String(d.getHours()).padStart(2, "0")}:${String(d.getMinutes()).padStart(2, "0")}`;
+}
+
+// Heure actuelle + 2h, arrondie à la demi-heure la plus proche, format "Hh[MM]" (ex: "11h30" ou "12h")
+function getDeadlineTime() {
+  const d = new Date(Date.now() + 2 * 60 * 60 * 1000);
+  const roundedMin = Math.round(d.getMinutes() / 30) * 30;
+  const h = roundedMin === 60 ? (d.getHours() + 1) % 24 : d.getHours();
+  const m = roundedMin === 60 ? 0 : roundedMin;
+  return `${h}h${m === 0 ? "" : String(m).padStart(2, "0")}`;
+}
+
 // -- Données du scénario ------------------------------------------------------
 // Tout ce qui est "suspect" dans le scénario est centralisé ici pour faciliter
 // la maintenance et la discussion avec le groupe.
@@ -25,7 +42,7 @@ const INDICES = [
   {
     label: "L'urgence artificielle",
     detail:
-      '"avant 12h00", "retourné", "frais supplémentaires". Tout est fait pour paniquer et court-circuiter la réflexion.',
+      '"Avant telle heure", "retourné", "frais supplémentaires". Tout est fait pour paniquer et court-circuiter la réflexion.',
   },
   {
     label: "Le montant dérisoire",
@@ -38,6 +55,8 @@ const INDICES = [
 
 export default function LaPosteScenario() {
   const navigate = useNavigate();
+  const mailTime = getMailTime();
+  const deadline = getDeadlineTime();
 
   function handleCtaClick() {
     navigate("/laposte/paiement");
@@ -89,7 +108,7 @@ export default function LaPosteScenario() {
                 <div className={styles.unreadDot} />
                 La Poste - Service Client
               </div>
-              <span className={styles.mailDateSmall}>Aujourd'hui, 08:47</span>
+              <span className={styles.mailDateSmall}>Aujourd'hui, {mailTime}</span>
             </div>
             <div className={styles.mailSubjectSmall}>
               ⚠️ Action requise : votre colis en attente
@@ -152,7 +171,7 @@ export default function LaPosteScenario() {
                   laposte.livraison@notifications-poste.com
                 </div>
               </div>
-              <div className={styles.mailDate}>Aujourd'hui à 08:47</div>
+              <div className={styles.mailDate}>Aujourd'hui à {mailTime}</div>
             </div>
 
             {/* Le mail en lui-même */}
@@ -168,7 +187,7 @@ export default function LaPosteScenario() {
               <div className={styles.emailBody}>
                 <div className={styles.emailAlertBox}>
                   <strong>
-                    ⚠️ Votre colis est en attente - Action requise avant 12h00
+                    ⚠️ Votre colis est en attente - Action requise avant {deadline}
                   </strong>
                   Un problème a été détecté lors de la livraison de votre colis.
                   Un règlement de <strong>2,49 €</strong> est nécessaire pour
@@ -188,7 +207,7 @@ export default function LaPosteScenario() {
                   Afin d'éviter le renvoi de votre colis à l'expéditeur, nous
                   vous invitons à régler la somme de{" "}
                   <span className={styles.highlight}>2,49 €</span> avant ce soir
-                  à 23h59.
+                  à {deadline}.
                 </p>
 
                 <p>
