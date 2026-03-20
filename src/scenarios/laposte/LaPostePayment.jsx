@@ -110,35 +110,53 @@ export default function LaPostePayment() {
         </div>
       </div>
 
-      {/* Révélation — superpose tout */}
+      {/* Popup révélation */}
       {revealed && (
-        <div className={styles.revealOverlay}>
-          <div className={styles.revealCard}>
-            <div className={styles.revealEmoji}>🎭</div>
-            <h2 className={styles.revealTitle}>Vous venez de vous faire arnaquer.</h2>
-            <p className={styles.revealText}>
-              Vos coordonnées bancaires viennent d'être transmises à des escrocs.
-              <br />
-              <strong>Dans la réalité, votre carte serait déjà compromise.</strong>
+        <div className={styles.modalBackdrop} onClick={() => navigate("/laposte")}>
+          <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
+
+            <div className={styles.modalTop}>
+              <div className={styles.modalIcon}>💳</div>
+              <div className={styles.modalBadge}>Arnaque réussie</div>
+            </div>
+
+            <h2 className={styles.modalTitle}>
+              Votre carte vient d'être volée.
+            </h2>
+            <p className={styles.modalSub}>
+              En situation réelle, ces données seraient déjà entre les mains des escrocs.{" "}
+              <strong>Le groupe n'a pas réussi à vous arrêter à temps.</strong>
             </p>
 
-            <div className={styles.revealIndices}>
-              <div className={styles.revealIndice}>
-                <span className={styles.indiceNum}>①</span>
-                <span>L'URL commence par <strong>http://</strong> — aucun site de paiement légitime n'utilise HTTP, toujours HTTPS.</span>
+            <div className={styles.divider} />
+
+            <p className={styles.indicesLabel}>Ce que tout le monde aurait dû voir :</p>
+            <div className={styles.indices}>
+              <div className={styles.indice}>
+                <span className={styles.indiceIcon}>🔓</span>
+                <span>
+                  <strong>HTTP sans cadenas</strong> — aucun site de paiement sérieux
+                  n'utilise HTTP. HTTPS est obligatoire.
+                </span>
               </div>
-              <div className={styles.revealIndice}>
-                <span className={styles.indiceNum}>②</span>
-                <span>Le domaine <strong>laposte-paiement-rapide.xyz</strong> n'a rien à voir avec laposte.fr. Le .xyz est un signal d'alarme.</span>
+              <div className={styles.indice}>
+                <span className={styles.indiceIcon}>🌐</span>
+                <span>
+                  <strong>laposte-paiement-rapide.xyz</strong> — le domaine officiel
+                  de La Poste c'est laposte.fr, point.
+                </span>
               </div>
-              <div className={styles.revealIndice}>
-                <span className={styles.indiceNum}>③</span>
-                <span>Les badges "Paiement sécurisé" et "3D Secure" sont de simples emojis — n'importe qui peut les écrire.</span>
+              <div className={styles.indice}>
+                <span className={styles.indiceIcon}>🛡️</span>
+                <span>
+                  <strong>Les badges "Sécurisé"</strong> sont des emojis collés là
+                  pour rassurer — ils ne garantissent rien.
+                </span>
               </div>
             </div>
 
-            <button className={styles.revealBtn} onClick={() => navigate("/laposte")}>
-              ← Retour au mail
+            <button className={styles.modalBtn} onClick={() => navigate("/laposte")}>
+              ← Retour au mail pour débriefer
             </button>
           </div>
         </div>

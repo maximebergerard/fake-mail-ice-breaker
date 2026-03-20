@@ -25,7 +25,7 @@ const INDICES = [
   {
     label: "L'urgence artificielle",
     detail:
-      '"avant 23h59", "retourné", "frais supplémentaires". Tout est fait pour paniquer et court-circuiter la réflexion.',
+      '"avant 12h00", "retourné", "frais supplémentaires". Tout est fait pour paniquer et court-circuiter la réflexion.',
   },
   {
     label: "Le montant dérisoire",
@@ -168,7 +168,7 @@ export default function LaPosteScenario() {
               <div className={styles.emailBody}>
                 <div className={styles.emailAlertBox}>
                   <strong>
-                    ⚠️ Votre colis est en attente - Action requise avant 23h59
+                    ⚠️ Votre colis est en attente - Action requise avant 12h00
                   </strong>
                   Un problème a été détecté lors de la livraison de votre colis.
                   Un règlement de <strong>2,49 €</strong> est nécessaire pour

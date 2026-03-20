@@ -107,7 +107,7 @@ Dans le tableau `SCENARIOS`, ajoute un objet :
 1. L'adresse mail de l'expéditeur - `notifications-poste.com` au lieu de `laposte.fr`
 2. L'URL du bouton CTA - `laposte-paiement-rapide.xyz` (domaine .xyz = red flag)
 3. L'URL dans la barre navigateur - `laposte-espace-client.net` (pas .fr)
-4. L'urgence artificielle - "avant 23h59", "retourné", "frais supplémentaires"
+4. L'urgence artificielle - "avant 12h00", "retourné", "frais supplémentaires"
 5. Le montant dérisoire - 2,49 € semble sans risque, mais ils récupèrent la carte
 
 **Technique pédagogique :** La question "qu'est-ce qui vous a semblé convaincant ?" est plus
