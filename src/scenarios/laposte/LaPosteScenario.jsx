@@ -79,14 +79,14 @@ export default function LaPosteScenario() {
             Boîte de réception (1 non lu)
           </div>
 
-          {/* Mail arnaque — non lu, actif */}
+          {/* Mail arnaque - non lu, actif */}
           <div
             className={`${styles.mailItem} ${styles.unread} ${styles.activeItem}`}
           >
             <div className={styles.mailSender}>
               <div className={styles.senderWithDot}>
                 <div className={styles.unreadDot} />
-                La Poste — Service Client
+                La Poste - Service Client
               </div>
               <span className={styles.mailDateSmall}>Aujourd'hui, 08:47</span>
             </div>
@@ -105,7 +105,7 @@ export default function LaPosteScenario() {
               <span className={styles.mailDateSmall}>Hier</span>
             </div>
             <div className={styles.mailSubjectSmall}>
-              Bulletin municipal — Mars 2026
+              Bulletin municipal - Mars 2026
             </div>
             <div className={styles.mailPreview}>
               Retrouvez les actualités de votre commune...
@@ -144,7 +144,7 @@ export default function LaPosteScenario() {
               <div className={styles.senderAvatar}>📦</div>
               <div className={styles.senderInfo}>
                 <div className={styles.senderName}>
-                  La Poste — Service Livraison
+                  La Poste - Service Livraison
                 </div>
                 {/* Adresse suspecte : laposte.livraison@notifications-poste.com */}
                 <div className={styles.senderEmail}>
@@ -157,7 +157,7 @@ export default function LaPosteScenario() {
             {/* Le mail en lui-même */}
             <div className={styles.emailContainer}>
               <div className={styles.emailHeaderBand}>
-                {/* Logo La Poste approximatif — couleur jaune/or légèrement différente */}
+                {/* Logo La Poste approximatif - couleur jaune/or légèrement différente */}
                 <div className={styles.laposteLogo}>La Poste</div>
                 <div className={styles.laposteTagline}>
                   Le service qui vous rapproche
@@ -167,7 +167,7 @@ export default function LaPosteScenario() {
               <div className={styles.emailBody}>
                 <div className={styles.emailAlertBox}>
                   <strong>
-                    ⚠️ Votre colis est en attente — Action requise avant 23h59
+                    ⚠️ Votre colis est en attente - Action requise avant 23h59
                   </strong>
                   Un problème a été détecté lors de la livraison de votre colis.
                   Un règlement de <strong>2,49 €</strong> est nécessaire pour
@@ -199,7 +199,7 @@ export default function LaPosteScenario() {
                   <button className={styles.ctaBtn} onClick={handleCtaClick}>
                     Régler mes frais de livraison →
                   </button>
-                  {/* URL sous le bouton — très suspecte si on la lit */}
+                  {/* URL sous le bouton - très suspecte si on la lit */}
                   <span className={styles.ctaUrl}>
                     →
                     http://laposte-paiement-rapide.xyz/fr/checkout?ref=FR882341XP
@@ -219,7 +219,7 @@ export default function LaPosteScenario() {
                 Ce message a été envoyé automatiquement par notre système de
                 notification. Merci de ne pas répondre directement à cet e-mail.
                 <br />
-                La Poste SA — 9 rue du Colonel Pierre Avia, 75015 Paris —{" "}
+                La Poste SA - 9 rue du Colonel Pierre Avia, 75015 Paris -{" "}
                 <em>laposte.fr</em>
               </div>
             </div>

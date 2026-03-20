@@ -11,7 +11,7 @@ const SCENARIOS = [
     emoji: "📦",
     label: "Faux mail La Poste",
     description:
-      "Un mail de phishing imitant La Poste — colis en attente, 2,49 € à régler.",
+      "Un mail de phishing imitant La Poste - colis en attente, 2,49 € à régler.",
     tags: ["Phishing", "Urgence artificielle", "Faux lien"],
     difficulty: "Facile",
   },
@@ -40,7 +40,7 @@ export default function HomePage() {
         <div className={styles.headerInner}>
           <div className={styles.logo}>🎭</div>
           <div>
-            <h1 className={styles.title}>Ice Breaker — Arnaques en ligne</h1>
+            <h1 className={styles.title}>Ice Breaker - Arnaques en ligne</h1>
             <p className={styles.subtitle}>
               Outil pédagogique pour les Cafés numériques · Projet de
               théâtre-forum

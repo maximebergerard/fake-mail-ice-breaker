@@ -1,6 +1,6 @@
-import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-import styles from './AnimatorPanel.module.css'
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import styles from "./AnimatorPanel.module.css";
 
 /**
  * Panneau réservé à l'animateur.
@@ -11,14 +11,17 @@ import styles from './AnimatorPanel.module.css'
  *   indices : Array<{ label: string, detail: string }>
  *   title   : string  (optionnel, ex: "Les 5 indices à faire trouver")
  */
-export default function AnimatorPanel({ indices, title = 'Les indices à faire trouver' }) {
-  const [open, setOpen] = useState(false)
-  const navigate = useNavigate()
+export default function AnimatorPanel({
+  indices,
+  title = "Les indices à faire trouver",
+}) {
+  const [open, setOpen] = useState(false);
+  const navigate = useNavigate();
 
   return (
     <>
       <div className={styles.controls}>
-        <button className={styles.backBtn} onClick={() => navigate('/')}>
+        <button className={styles.backBtn} onClick={() => navigate("/")}>
           ← Scénarios
         </button>
         <button className={styles.triggerBtn} onClick={() => setOpen(true)}>
@@ -29,15 +32,19 @@ export default function AnimatorPanel({ indices, title = 'Les indices à faire t
       {open && (
         <div className={styles.overlay} onClick={() => setOpen(false)}>
           <div className={styles.panel} onClick={(e) => e.stopPropagation()}>
-            <button className={styles.closeBtn} onClick={() => setOpen(false)}>✕</button>
+            <button className={styles.closeBtn} onClick={() => setOpen(false)}>
+              ✕
+            </button>
             <div className={styles.panelTitle}>🎯 {title}</div>
             <div className={styles.grid}>
               {indices.map((item, i) => (
                 <div key={i} className={styles.indice}>
-                  <span className={styles.num}>{'①②③④⑤⑥⑦⑧⑨'[i] ?? `${i + 1}.`}</span>
+                  <span className={styles.num}>
+                    {"①②③④⑤⑥⑦⑧⑨"[i] ?? `${i + 1}.`}
+                  </span>
                   <span>
                     <strong>{item.label}</strong>
-                    {item.detail && <> — {item.detail}</>}
+                    {item.detail && <> - {item.detail}</>}
                   </span>
                 </div>
               ))}
@@ -46,5 +53,5 @@ export default function AnimatorPanel({ indices, title = 'Les indices à faire t
         </div>
       )}
     </>
-  )
+  );
 }

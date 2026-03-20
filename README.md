@@ -1,4 +1,4 @@
-# Ice Breaker — Arnaques en ligne
+# Ice Breaker - Arnaques en ligne
 
 Outil pédagogique pour les **Cafés numériques** (ateliers de 2h, max 10 personnes).
 
@@ -8,7 +8,7 @@ Lors des séances sur les thèmes **Arnaques en ligne / IA / Réseaux sociaux**,
 utilise cet outil comme ice breaker de théâtre-forum :
 
 1. Le scénario est projeté sur l'écran quand les participants arrivent.
-2. L'animateur joue le personnage qui "reçoit" le mail — il fait semblant d'être stressé, cherche sa carte bleue, etc.
+2. L'animateur joue le personnage qui "reçoit" le mail - il fait semblant d'être stressé, cherche sa carte bleue, etc.
 3. Le groupe doit détecter les indices qui trahissent l'arnaque.
 4. L'animateur clique sur **"Révéler les indices"** (bouton discret en bas à droite) pour lancer la discussion.
 
@@ -36,7 +36,7 @@ src/
 ├-- main.jsx                 # Point d'entrée React
 │
 ├-- pages/
-│   ├-- HomePage.jsx         # Page d'accueil — liste des scénarios
+│   ├-- HomePage.jsx         # Page d'accueil - liste des scénarios
 │   └-- HomePage.module.css
 │
 ├-- components/
@@ -101,26 +101,26 @@ Dans le tableau `SCENARIOS`, ajoute un objet :
 
 ### 📦 Faux mail La Poste (`/laposte`)
 
-**Arnaque simulée :** Phishing imitant La Poste — colis en attente, 2,49 € à régler pour débrouiller une livraison.
+**Arnaque simulée :** Phishing imitant La Poste - colis en attente, 2,49 € à régler pour débrouiller une livraison.
 
 **Indices à faire trouver :**
-1. L'adresse mail de l'expéditeur — `notifications-poste.com` au lieu de `laposte.fr`
-2. L'URL du bouton CTA — `laposte-paiement-rapide.xyz` (domaine .xyz = red flag)
-3. L'URL dans la barre navigateur — `laposte-espace-client.net` (pas .fr)
-4. L'urgence artificielle — "avant 23h59", "retourné", "frais supplémentaires"
-5. Le montant dérisoire — 2,49 € semble sans risque, mais ils récupèrent la carte
+1. L'adresse mail de l'expéditeur - `notifications-poste.com` au lieu de `laposte.fr`
+2. L'URL du bouton CTA - `laposte-paiement-rapide.xyz` (domaine .xyz = red flag)
+3. L'URL dans la barre navigateur - `laposte-espace-client.net` (pas .fr)
+4. L'urgence artificielle - "avant 23h59", "retourné", "frais supplémentaires"
+5. Le montant dérisoire - 2,49 € semble sans risque, mais ils récupèrent la carte
 
 **Technique pédagogique :** La question "qu'est-ce qui vous a semblé convaincant ?" est plus
-riche que "qu'est-ce qui était faux ?" — elle valide les hésitations du groupe.
+riche que "qu'est-ce qui était faux ?" - elle valide les hésitations du groupe.
 
 ---
 
 ## Stack technique
 
-- **React 19** + **Vite** — pas de dépendances inutiles
-- **React Router** — navigation entre scénarios
-- **CSS Modules** — styles scopés par composant, pas de risque de collision
-- Aucun backend — tout est statique, fonctionne offline
+- **React 19** + **Vite** - pas de dépendances inutiles
+- **React Router** - navigation entre scénarios
+- **CSS Modules** - styles scopés par composant, pas de risque de collision
+- Aucun backend - tout est statique, fonctionne offline
 
 ---
 
