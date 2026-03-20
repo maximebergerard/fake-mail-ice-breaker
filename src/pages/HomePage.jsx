@@ -27,6 +27,75 @@ const SCENARIOS = [
   // },
 ];
 
+const SIMULATIONS = [
+  {
+    id: "sms-laposte",
+    path: "/sms-laposte",
+    emoji: "📱",
+    label: "CAS 1 — SMS La Poste",
+    description:
+      "Un SMS prétend qu'un colis est bloqué et demande 1,95 € de frais de douane via un lien bit.ly.",
+    tags: ["Smishing", "Faux lien", "Urgence"],
+    difficulty: "Facile",
+    verdict: "arnaque",
+  },
+  {
+    id: "popup-microsoft",
+    path: "/popup-microsoft",
+    emoji: "💻",
+    label: "CAS 2 — Alerte Microsoft",
+    description:
+      "Une fenêtre Windows alarmante demande d'appeler un faux support technique.",
+    tags: ["Fraude support", "Ingénierie sociale"],
+    difficulty: "Facile",
+    verdict: "arnaque",
+  },
+  {
+    id: "facebook-arnaque",
+    path: "/facebook-arnaque",
+    emoji: "👍",
+    label: "CAS 3 — Pub Facebook",
+    description:
+      "Une publicité Facebook vend un robot de cuisine à -90% sur un site en .xyz.",
+    tags: ["Fausse pub", "Site frauduleux"],
+    difficulty: "Moyen",
+    verdict: "arnaque",
+  },
+  {
+    id: "whatsapp-lucas",
+    path: "/whatsapp-lucas",
+    emoji: "💬",
+    label: "CAS 4 — WhatsApp 'Lucas'",
+    description:
+      "Un numéro inconnu se prétend être le petit-fils Lucas et demande 350 € en urgence.",
+    tags: ["Arnaque petits-enfants", "Usurpation identité"],
+    difficulty: "Moyen",
+    verdict: "arnaque",
+  },
+  {
+    id: "sms-banque-postale",
+    path: "/sms-banque-postale",
+    emoji: "🏦",
+    label: "CAS 5 — SMS Banque Postale",
+    description:
+      "Un vrai SMS d'alerte de La Banque Postale signale une connexion inhabituelle.",
+    tags: ["Authentique", "Alerte bancaire"],
+    difficulty: "Facile",
+    verdict: "vrai",
+  },
+  {
+    id: "whatsapp-famille",
+    path: "/whatsapp-famille",
+    emoji: "👨‍👩‍👦",
+    label: "CAS 6 — WhatsApp Lucas (vrai)",
+    description:
+      "Lucas (contact enregistré) propose de venir déjeuner dimanche avec sa compagne.",
+    tags: ["Authentique", "Message familial"],
+    difficulty: "Facile",
+    verdict: "vrai",
+  },
+];
+
 const DIFFICULTY_COLOR = {
   Facile: "#27ae60",
   Moyen: "#f39c12",
@@ -97,6 +166,57 @@ export default function HomePage() {
               </p>
             </div>
           </div>
+        </div>
+
+        {/* Simulations pratiques */}
+        <h2 className={styles.sectionTitle} style={{ marginTop: "2.5rem" }}>
+          Simulations pratiques — Cas en binôme
+        </h2>
+        <p className={styles.sectionDesc}>
+          Chaque cas présente une interface réaliste (SMS, WhatsApp, pop-up…).
+          L'animateur révèle les indices un par un. Les cartes{" "}
+          <span className={styles.verdictInline} style={{ color: "#e74c3c" }}>Arnaque</span>
+          {" "}et{" "}
+          <span className={styles.verdictInline} style={{ color: "#27ae60" }}>Vrai</span>
+          {" "}permettent de comparer les deux cas similaires.
+        </p>
+        <div className={styles.grid}>
+          {SIMULATIONS.map((s) => (
+            <Link key={s.id} to={s.path} className={styles.card}>
+              <div className={styles.cardEmoji}>{s.emoji}</div>
+              <div className={styles.cardBody}>
+                <div className={styles.cardTop}>
+                  <span className={styles.cardLabel}>{s.label}</span>
+                  <div className={styles.cardTopRight}>
+                    <span
+                      className={
+                        s.verdict === "arnaque"
+                          ? styles.verdictBadgeDanger
+                          : styles.verdictBadgeOk
+                      }
+                    >
+                      {s.verdict === "arnaque" ? "Arnaque" : "Vrai"}
+                    </span>
+                    <span
+                      className={styles.difficulty}
+                      style={{ color: DIFFICULTY_COLOR[s.difficulty] }}
+                    >
+                      {s.difficulty}
+                    </span>
+                  </div>
+                </div>
+                <p className={styles.cardDesc}>{s.description}</p>
+                <div className={styles.tags}>
+                  {s.tags.map((t) => (
+                    <span key={t} className={styles.tag}>
+                      {t}
+                    </span>
+                  ))}
+                </div>
+              </div>
+              <div className={styles.cardArrow}>→</div>
+            </Link>
+          ))}
         </div>
       </main>
     </div>

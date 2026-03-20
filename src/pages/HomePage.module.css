@@ -156,3 +156,44 @@
   flex-shrink: 0;
   margin-top: 0.3rem;
 }
+
+.cardTopRight {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.verdictBadgeDanger {
+  font-size: 0.7rem;
+  font-weight: 700;
+  background: rgba(231, 76, 60, 0.12);
+  color: #e74c3c;
+  border: 1px solid rgba(231, 76, 60, 0.4);
+  padding: 1px 8px;
+  border-radius: 20px;
+  white-space: nowrap;
+}
+
+.verdictBadgeOk {
+  font-size: 0.7rem;
+  font-weight: 700;
+  background: rgba(39, 174, 96, 0.12);
+  color: #27ae60;
+  border: 1px solid rgba(39, 174, 96, 0.4);
+  padding: 1px 8px;
+  border-radius: 20px;
+  white-space: nowrap;
+}
+
+.sectionDesc {
+  font-size: 0.85rem;
+  color: #636366;
+  line-height: 1.6;
+  margin-bottom: 1.2rem;
+  max-width: 700px;
+}
+
+.verdictInline {
+  font-weight: 600;
+}

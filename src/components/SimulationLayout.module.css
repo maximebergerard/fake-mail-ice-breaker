@@ -1,0 +1,384 @@
+.layout {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+  background: #f0f2f5;
+  font-family: 'DM Sans', sans-serif;
+}
+
+/* Top bar */
+.topBar {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background: #1c1c1e;
+  color: white;
+  padding: 0.75rem 1.25rem;
+  flex-shrink: 0;
+  z-index: 10;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+}
+
+.backBtn {
+  background: #2c2c2e;
+  border: none;
+  color: #aeaeb2;
+  font-size: 0.85rem;
+  padding: 0.4rem 0.85rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-family: inherit;
+  white-space: nowrap;
+  transition: background 0.15s, color 0.15s;
+}
+
+.backBtn:hover {
+  background: #3a3a3c;
+  color: white;
+}
+
+.topTitle {
+  flex: 1;
+  font-size: 1rem;
+  font-weight: 600;
+  color: white;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.verdictBadge {
+  font-size: 0.78rem;
+  font-weight: 700;
+  padding: 0.3rem 0.75rem;
+  border-radius: 20px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.verdictDanger {
+  background: rgba(231, 76, 60, 0.2);
+  color: #e74c3c;
+  border: 1px solid #e74c3c;
+}
+
+.verdictOk {
+  background: rgba(39, 174, 96, 0.2);
+  color: #27ae60;
+  border: 1px solid #27ae60;
+}
+
+/* Scene */
+.scene {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 2rem 1rem;
+}
+
+/* Clue panel — slides up from bottom above the bottom bar */
+.cluePanel {
+  position: fixed;
+  bottom: 56px; /* height of bottom bar */
+  left: 0;
+  right: 0;
+  z-index: 20;
+  animation: slideUp 0.3s ease-out;
+}
+
+.cluePanelInner {
+  background: #1c1c1e;
+  color: white;
+  padding: 1.25rem 1.5rem;
+  border-top: 2px solid #e74c3c;
+  box-shadow: 0 -4px 20px rgba(0,0,0,0.4);
+}
+
+.cluePanelHeader {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+  margin-bottom: 0.6rem;
+}
+
+.clueProgress {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #e74c3c;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  white-space: nowrap;
+}
+
+.cluePanelLabel {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: white;
+}
+
+.cluePanelDetail {
+  font-size: 0.875rem;
+  color: #aeaeb2;
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+
+.cluePanelActions {
+  display: flex;
+  gap: 0.75rem;
+  justify-content: flex-end;
+}
+
+@keyframes slideUp {
+  from { transform: translateY(100%); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+/* Bottom bar */
+.bottomBar {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  background: #2c2c2e;
+  border-top: 1px solid #3a3a3c;
+  padding: 0.75rem 1.25rem;
+  flex-shrink: 0;
+  height: 56px;
+  z-index: 15;
+}
+
+.bottomClueControls {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+  justify-content: center;
+}
+
+.bottomProgress {
+  color: #8e8e93;
+  font-size: 0.82rem;
+}
+
+/* Buttons */
+.btnReveal {
+  background: #e74c3c;
+  color: white;
+  border: none;
+  padding: 0.55rem 1.25rem;
+  border-radius: 8px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+  transition: background 0.15s;
+}
+
+.btnReveal:hover {
+  background: #c0392b;
+}
+
+.btnRestart {
+  background: #3a3a3c;
+  color: #aeaeb2;
+  border: none;
+  padding: 0.55rem 1.25rem;
+  border-radius: 8px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+  transition: background 0.15s, color 0.15s;
+}
+
+.btnRestart:hover {
+  background: #48484a;
+  color: white;
+}
+
+.btnPrimary {
+  background: #e74c3c;
+  color: white;
+  border: none;
+  padding: 0.5rem 1.1rem;
+  border-radius: 7px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+  transition: background 0.15s;
+}
+
+.btnPrimary:hover {
+  background: #c0392b;
+}
+
+.btnSecondary {
+  background: #3a3a3c;
+  color: #aeaeb2;
+  border: none;
+  padding: 0.5rem 1.1rem;
+  border-radius: 7px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+  transition: background 0.15s;
+}
+
+.btnSecondary:hover {
+  background: #48484a;
+  color: white;
+}
+
+/* Conclusion overlay */
+.conclusionOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 50;
+  padding: 1.5rem;
+  animation: fadeIn 0.35s ease-out;
+}
+
+.conclusionCard {
+  background: #1c1c1e;
+  border-radius: 16px;
+  padding: 2rem;
+  max-width: 560px;
+  width: 100%;
+  color: white;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+}
+
+.conclusionVerdict {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: 0.3rem 0.75rem;
+  border-radius: 20px;
+  display: inline-block;
+  margin-bottom: 1rem;
+}
+
+.conclusionTitle {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: white;
+  margin-bottom: 0.75rem;
+}
+
+.conclusionBody {
+  font-size: 0.9rem;
+  color: #aeaeb2;
+  line-height: 1.65;
+  margin-bottom: 1.25rem;
+}
+
+.conclusionReflex {
+  display: flex;
+  gap: 0.75rem;
+  background: #2c2c2e;
+  border-left: 3px solid #f39c12;
+  border-radius: 6px;
+  padding: 1rem 1.1rem;
+  margin-bottom: 1.5rem;
+}
+
+.conclusionReflexIcon {
+  font-size: 1.1rem;
+  flex-shrink: 0;
+  margin-top: 0.1rem;
+}
+
+.conclusionReflex p {
+  font-size: 0.875rem;
+  color: #d1d1d6;
+  line-height: 1.6;
+  margin: 0;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.96); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+/* Action modal */
+.actionModalBackdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 60;
+  padding: 1.5rem;
+  animation: fadeIn 0.2s ease-out;
+}
+
+.actionModal {
+  background: #1c1c1e;
+  border-radius: 14px;
+  padding: 2rem;
+  max-width: 440px;
+  width: 100%;
+  color: white;
+  box-shadow: 0 16px 50px rgba(0,0,0,0.5);
+  text-align: center;
+}
+
+.actionModalIcon {
+  font-size: 2.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.actionModalTitle {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #e74c3c;
+  margin-bottom: 0.75rem;
+}
+
+.actionModalBody {
+  font-size: 0.875rem;
+  color: #aeaeb2;
+  line-height: 1.65;
+  margin-bottom: 1.5rem;
+}
+
+/* Print */
+@media print {
+  .bottomBar,
+  .cluePanel,
+  .conclusionOverlay,
+  .actionModalBackdrop,
+  .backBtn,
+  .btnReveal,
+  .btnRestart,
+  .btnPrimary,
+  .btnSecondary {
+    display: none !important;
+  }
+
+  .layout {
+    height: auto;
+    overflow: visible;
+  }
+
+  .scene {
+    overflow: visible;
+  }
+
+  .topBar {
+    position: static;
+  }
+}

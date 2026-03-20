@@ -1,0 +1,35 @@
+.msgContent {
+  display: flex;
+  flex-direction: column;
+}
+
+.msgText {
+  font-size: 0.9rem;
+  color: #1c1c1e;
+  margin: 0 0 3px;
+  line-height: 1.45;
+  word-break: break-word;
+}
+
+.msgTime {
+  font-size: 0.65rem;
+  color: #8e8e93;
+  align-self: flex-end;
+  display: block;
+}
+
+.linkBtn {
+  background: none;
+  border: none;
+  color: #007AFF;
+  text-decoration: underline;
+  cursor: pointer;
+  font-size: inherit;
+  font-family: inherit;
+  padding: 0;
+  display: inline;
+}
+
+.linkBtn:hover {
+  color: #005ecb;
+}

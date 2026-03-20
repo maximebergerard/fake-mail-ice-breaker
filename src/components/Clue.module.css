@@ -1,0 +1,87 @@
+.clue {
+  display: inline;
+  position: relative;
+  border-radius: 4px;
+  transition: outline 0.2s, background 0.2s;
+}
+
+/* Active state — pulsing outline */
+.clue.active.danger {
+  outline: 2px solid #f39c12;
+  outline-offset: 2px;
+  background: rgba(243, 156, 18, 0.12);
+  animation: pulseDanger 1.2s ease-in-out infinite;
+}
+
+.clue.active.ok {
+  outline: 2px solid #27ae60;
+  outline-offset: 2px;
+  background: rgba(39, 174, 96, 0.12);
+  animation: pulseOk 1.2s ease-in-out infinite;
+}
+
+/* Seen state — faint outline */
+.clue.seen.danger {
+  outline: 1px solid rgba(243, 156, 18, 0.5);
+  outline-offset: 2px;
+  background: rgba(243, 156, 18, 0.06);
+}
+
+.clue.seen.ok {
+  outline: 1px solid rgba(39, 174, 96, 0.5);
+  outline-offset: 2px;
+  background: rgba(39, 174, 96, 0.06);
+}
+
+/* Badge */
+.badge {
+  display: inline-block;
+  font-size: 0.85em;
+  line-height: 1;
+  margin-right: 3px;
+  vertical-align: middle;
+  flex-shrink: 0;
+}
+
+.clue.active.danger .badge {
+  color: #f39c12;
+}
+
+.clue.active.ok .badge {
+  color: #27ae60;
+}
+
+.clue.seen.danger .badge {
+  color: rgba(243, 156, 18, 0.7);
+}
+
+.clue.seen.ok .badge {
+  color: rgba(39, 174, 96, 0.7);
+}
+
+@keyframes pulseDanger {
+  0%, 100% { outline-color: #f39c12; background: rgba(243, 156, 18, 0.12); }
+  50% { outline-color: #e74c3c; background: rgba(231, 76, 60, 0.15); }
+}
+
+@keyframes pulseOk {
+  0%, 100% { outline-color: #27ae60; background: rgba(39, 174, 96, 0.12); }
+  50% { outline-color: #2ecc71; background: rgba(46, 204, 113, 0.18); }
+}
+
+/* Print: always show outline and badge */
+@media print {
+  .clue.danger {
+    outline: 2px solid #f39c12 !important;
+    background: rgba(243, 156, 18, 0.1) !important;
+  }
+  .clue.ok {
+    outline: 2px solid #27ae60 !important;
+    background: rgba(39, 174, 96, 0.1) !important;
+  }
+  .badge {
+    display: inline-block !important;
+  }
+  @keyframes pulseDanger { }
+  @keyframes pulseOk { }
+}

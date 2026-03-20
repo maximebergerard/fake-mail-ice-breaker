@@ -1,0 +1,106 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+  max-width: 420px;
+}
+
+.waMsg {
+  font-size: 0.9rem;
+  color: #1c1c1e;
+  margin: 0 0 2px;
+  line-height: 1.45;
+  word-break: break-word;
+}
+
+.waMeta {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.waTime {
+  font-size: 0.65rem;
+  color: #8e8e93;
+}
+
+.callSeparator {
+  text-align: center;
+  font-size: 0.75rem;
+  color: #8e8e93;
+  background: rgba(0,0,0,0.05);
+  border-radius: 10px;
+  padding: 4px 12px;
+  align-self: center;
+  margin: 6px 0;
+}
+
+.successNote {
+  background: #e8f8ee;
+  border: 1px solid #27ae60;
+  color: #27ae60;
+  font-size: 0.82rem;
+  font-weight: 600;
+  padding: 8px 14px;
+  border-radius: 8px;
+  text-align: center;
+  align-self: center;
+  margin: 4px 0;
+}
+
+/* Action buttons */
+.actionButtons {
+  display: flex;
+  gap: 12px;
+  width: 100%;
+  padding: 4px 0;
+}
+
+.btnDanger {
+  flex: 1;
+  background: #e74c3c;
+  color: white;
+  border: none;
+  padding: 12px;
+  border-radius: 10px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+  transition: background 0.15s;
+}
+
+.btnDanger:hover {
+  background: #c0392b;
+}
+
+.btnSuccess {
+  flex: 1;
+  background: #27ae60;
+  color: white;
+  border: none;
+  padding: 12px;
+  border-radius: 10px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+  transition: background 0.15s;
+}
+
+.btnSuccess:hover {
+  background: #219150;
+}
+
+.avoidedNote {
+  flex: 1;
+  text-align: center;
+  color: #27ae60;
+  font-weight: 700;
+  font-size: 0.9rem;
+  padding: 12px;
+  background: rgba(39, 174, 96, 0.1);
+  border-radius: 10px;
+  border: 1px solid #27ae60;
+}

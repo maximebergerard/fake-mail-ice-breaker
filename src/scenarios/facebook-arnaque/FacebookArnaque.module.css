@@ -1,0 +1,314 @@
+.fbWrapper {
+  width: 100%;
+  max-width: 500px;
+  background: #f0f2f5;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+  font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
+}
+
+/* Nav */
+.fbNav {
+  background: #4267B2;
+  display: flex;
+  align-items: center;
+  padding: 0 12px;
+  height: 52px;
+  gap: 10px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.fbLogo {
+  width: 40px;
+  height: 40px;
+  background: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.fbF {
+  color: #4267B2;
+  font-size: 1.6rem;
+  font-weight: 900;
+  line-height: 1;
+  margin-top: 2px;
+  font-family: Georgia, serif;
+}
+
+.fbSearch {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255,255,255,0.15);
+  border-radius: 20px;
+  padding: 7px 14px;
+  color: rgba(255,255,255,0.75);
+  font-size: 0.82rem;
+  flex: 1;
+}
+
+.fbNavIcons {
+  display: flex;
+  gap: 4px;
+}
+
+.fbNavIcon {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  font-size: 1.1rem;
+  cursor: pointer;
+  opacity: 0.75;
+}
+
+.fbNavIconActive {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  font-size: 1.1rem;
+  cursor: pointer;
+  background: rgba(255,255,255,0.2);
+  color: white;
+}
+
+/* Feed */
+.fbFeed {
+  padding: 10px 0;
+}
+
+/* Post */
+.fbPost {
+  background: white;
+  border-top: 1px solid #dddfe2;
+  border-bottom: 1px solid #dddfe2;
+}
+
+.postHeader {
+  display: flex;
+  align-items: center;
+  padding: 12px 12px 8px;
+  gap: 10px;
+}
+
+.postAvatar {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: #4267B2;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.9rem;
+  flex-shrink: 0;
+}
+
+.postMeta {
+  flex: 1;
+}
+
+.postNameRow {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.postName {
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: #1c1c1e;
+}
+
+.postSub {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 1px;
+}
+
+.sponsored {
+  font-size: 0.72rem;
+  color: #606770;
+}
+
+.dot {
+  color: #606770;
+  font-size: 0.72rem;
+}
+
+.postMore {
+  background: none;
+  border: none;
+  color: #606770;
+  font-size: 1.2rem;
+  cursor: pointer;
+  padding: 4px 8px;
+  letter-spacing: 1px;
+  font-weight: 700;
+}
+
+/* Post text */
+.postText {
+  font-size: 0.875rem;
+  color: #1c1c1e;
+  padding: 0 12px 10px;
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* Product image */
+.productImage {
+  background: #f5f6f7;
+  border-top: 1px solid #dddfe2;
+  border-bottom: 1px solid #dddfe2;
+  padding: 20px 16px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.productEmoji {
+  font-size: 4rem;
+  flex-shrink: 0;
+  background: white;
+  border-radius: 8px;
+  width: 80px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #dddfe2;
+}
+
+.productInfo {
+  flex: 1;
+}
+
+.productName {
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: #1c1c1e;
+  margin-bottom: 6px;
+}
+
+.productPriceRow {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+
+.priceOld {
+  font-size: 0.85rem;
+  color: #8e8e93;
+  text-decoration: line-through;
+}
+
+.priceNew {
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: #e74c3c;
+}
+
+.discountBadge {
+  background: #e74c3c;
+  color: white;
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 2px 7px;
+  border-radius: 20px;
+}
+
+.productUrl {
+  font-size: 0.72rem;
+  color: #606770;
+}
+
+/* CTA */
+.ctaRow {
+  padding: 12px;
+}
+
+.btnAcheter {
+  width: 100%;
+  background: #4267B2;
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: inherit;
+  transition: background 0.15s;
+}
+
+.btnAcheter:hover {
+  background: #365899;
+}
+
+/* Reaction bar */
+.reactionBar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 4px 12px 8px;
+  border-bottom: 1px solid #dddfe2;
+}
+
+.reactionIcons {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.85rem;
+}
+
+.reactionCount {
+  font-size: 0.82rem;
+  color: #606770;
+  margin-left: 4px;
+}
+
+.reactionStats {
+  font-size: 0.78rem;
+  color: #606770;
+}
+
+/* Action bar */
+.actionBar {
+  display: flex;
+  padding: 2px 4px;
+}
+
+.actionBtn {
+  flex: 1;
+  background: none;
+  border: none;
+  padding: 8px 4px;
+  color: #606770;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  border-radius: 4px;
+  font-family: inherit;
+  transition: background 0.15s;
+}
+
+.actionBtn:hover {
+  background: #f0f2f5;
+}
