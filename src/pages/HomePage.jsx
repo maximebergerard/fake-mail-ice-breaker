@@ -1,20 +1,21 @@
-import { Link } from 'react-router-dom'
-import styles from './HomePage.module.css'
+import { Link } from "react-router-dom";
+import styles from "./HomePage.module.css";
 
 // Chaque scénario décrit une arnaque à faire deviner au groupe.
 // Pour en ajouter un, crée un nouveau dossier dans src/scenarios/,
 // ajoute une entrée ici, et une Route dans App.jsx.
 const SCENARIOS = [
   {
-    id: 'laposte',
-    path: '/laposte',
-    emoji: '📦',
-    label: 'Faux mail La Poste',
-    description: 'Un mail de phishing imitant La Poste — colis en attente, 2,49 € à régler.',
-    tags: ['Phishing', 'Urgence artificielle', 'Faux lien'],
-    difficulty: 'Facile',
+    id: "laposte",
+    path: "/laposte",
+    emoji: "📦",
+    label: "Faux mail La Poste",
+    description:
+      "Un mail de phishing imitant La Poste — colis en attente, 2,49 € à régler.",
+    tags: ["Phishing", "Urgence artificielle", "Faux lien"],
+    difficulty: "Facile",
   },
-  // ── AJOUTER D'AUTRES SCÉNARIOS ICI ──
+  // -- AJOUTER D'AUTRES SCÉNARIOS ICI --
   // {
   //   id: 'ameli',
   //   path: '/ameli',
@@ -24,13 +25,13 @@ const SCENARIOS = [
   //   tags: ['Phishing', 'Usurpation identité'],
   //   difficulty: 'Moyen',
   // },
-]
+];
 
 const DIFFICULTY_COLOR = {
-  'Facile': '#27ae60',
-  'Moyen': '#f39c12',
-  'Difficile': '#e74c3c',
-}
+  Facile: "#27ae60",
+  Moyen: "#f39c12",
+  Difficile: "#e74c3c",
+};
 
 export default function HomePage() {
   return (
@@ -41,14 +42,16 @@ export default function HomePage() {
           <div>
             <h1 className={styles.title}>Ice Breaker — Arnaques en ligne</h1>
             <p className={styles.subtitle}>
-              Outil pédagogique pour les Cafés numériques · Projet de théâtre-forum
+              Outil pédagogique pour les Cafés numériques · Projet de
+              théâtre-forum
             </p>
           </div>
         </div>
         <div className={styles.howTo}>
-          <strong>Comment ça marche :</strong> choisis un scénario, projette-le sur l'écran,
-          joue le personnage qui "reçoit" le mail, et laisse le groupe trouver les indices.
-          Le bouton <em>"Révéler les indices"</em> en bas à droite est réservé à l'animateur.
+          <strong>Comment ça marche :</strong> choisis un scénario, projette-le
+          sur l'écran, joue le personnage qui "reçoit" le mail, et laisse le
+          groupe trouver les indices. Le bouton <em>"Révéler les indices"</em>{" "}
+          en bas à droite est réservé à l'animateur.
         </div>
       </header>
 
@@ -71,7 +74,9 @@ export default function HomePage() {
                 <p className={styles.cardDesc}>{s.description}</p>
                 <div className={styles.tags}>
                   {s.tags.map((t) => (
-                    <span key={t} className={styles.tag}>{t}</span>
+                    <span key={t} className={styles.tag}>
+                      {t}
+                    </span>
                   ))}
                 </div>
               </div>
@@ -83,16 +88,17 @@ export default function HomePage() {
           <div className={styles.cardPlaceholder}>
             <div className={styles.cardEmoji}>➕</div>
             <div className={styles.cardBody}>
-              <span className={styles.cardLabel} style={{ color: '#8e8e93' }}>
+              <span className={styles.cardLabel} style={{ color: "#8e8e93" }}>
                 Ajouter un scénario
               </span>
-              <p className={styles.cardDesc} style={{ color: '#8e8e93' }}>
-                Crée un nouveau dossier dans <code>src/scenarios/</code> et suis les instructions du README.
+              <p className={styles.cardDesc} style={{ color: "#8e8e93" }}>
+                Crée un nouveau dossier dans <code>src/scenarios/</code> et suis
+                les instructions du README.
               </p>
             </div>
           </div>
         </div>
       </main>
     </div>
-  )
+  );
 }

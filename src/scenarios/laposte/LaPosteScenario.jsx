@@ -1,38 +1,45 @@
-import AnimatorPanel from '../../components/AnimatorPanel.jsx'
-import styles from './LaPosteScenario.module.css'
+import AnimatorPanel from "../../components/AnimatorPanel.jsx";
+import styles from "./LaPosteScenario.module.css";
 
-// ── Données du scénario ──────────────────────────────────────────────────────
+// -- Données du scénario ------------------------------------------------------
 // Tout ce qui est "suspect" dans le scénario est centralisé ici pour faciliter
 // la maintenance et la discussion avec le groupe.
 
 const INDICES = [
   {
     label: "L'adresse mail de l'expéditeur",
-    detail: 'laposte.livraison@notifications-poste.com et non @laposte.fr. La Poste écrit toujours depuis @laposte.fr',
+    detail:
+      "laposte.livraison@notifications-poste.com et non @laposte.fr. La Poste écrit toujours depuis @laposte.fr",
   },
   {
     label: "L'URL du bouton CTA",
-    detail: 'laposte-paiement-rapide.xyz n\'a rien d\'officiel. Le vrai site c\'est laposte.fr, point.',
+    detail:
+      "laposte-paiement-rapide.xyz n'a rien d'officiel. Le vrai site c'est laposte.fr, point.",
   },
   {
     label: "L'URL dans la barre du navigateur",
-    detail: 'laposte-espace-client.net en haut de page. Pas .fr, pas laposte.fr. Subtil mais faux.',
+    detail:
+      "laposte-espace-client.net en haut de page. Pas .fr, pas laposte.fr. Subtil mais faux.",
   },
   {
     label: "L'urgence artificielle",
-    detail: '"avant 23h59", "retourné", "frais supplémentaires". Tout est fait pour paniquer et court-circuiter la réflexion.',
+    detail:
+      '"avant 23h59", "retourné", "frais supplémentaires". Tout est fait pour paniquer et court-circuiter la réflexion.',
   },
   {
-    label: 'Le montant dérisoire',
-    detail: '2,49 € semble sans risque. En réalité, ils récupèrent le numéro de carte bancaire.',
+    label: "Le montant dérisoire",
+    detail:
+      "2,49 € semble sans risque. En réalité, ils récupèrent le numéro de carte bancaire.",
   },
-]
+];
 
-// ── Composant ────────────────────────────────────────────────────────────────
+// -- Composant ----------------------------------------------------------------
 
 export default function LaPosteScenario() {
   function handleCtaClick() {
-    alert('📌 Astuce animateur : en vrai, ce bouton mènerait vers un faux site de paiement. On en reparlera !')
+    alert(
+      "📌 Astuce animateur : en vrai, ce bouton mènerait vers un faux site de paiement. On en reparlera !",
+    );
   }
 
   return (
@@ -54,7 +61,6 @@ export default function LaPosteScenario() {
 
       {/* App mail */}
       <div className={styles.mailApp}>
-
         {/* Sidebar */}
         <div className={styles.sidebar}>
           <div className={styles.sidebarLogo}>✉️ MonMail</div>
@@ -69,10 +75,14 @@ export default function LaPosteScenario() {
 
         {/* Liste des mails */}
         <div className={styles.mailList}>
-          <div className={styles.mailListHeader}>Boîte de réception (1 non lu)</div>
+          <div className={styles.mailListHeader}>
+            Boîte de réception (1 non lu)
+          </div>
 
           {/* Mail arnaque — non lu, actif */}
-          <div className={`${styles.mailItem} ${styles.unread} ${styles.activeItem}`}>
+          <div
+            className={`${styles.mailItem} ${styles.unread} ${styles.activeItem}`}
+          >
             <div className={styles.mailSender}>
               <div className={styles.senderWithDot}>
                 <div className={styles.unreadDot} />
@@ -80,8 +90,12 @@ export default function LaPosteScenario() {
               </div>
               <span className={styles.mailDateSmall}>Aujourd'hui, 08:47</span>
             </div>
-            <div className={styles.mailSubjectSmall}>⚠️ Action requise : votre colis en attente</div>
-            <div className={styles.mailPreview}>Bonjour, votre colis n°FR882341 est en attente de livraison...</div>
+            <div className={styles.mailSubjectSmall}>
+              ⚠️ Action requise : votre colis en attente
+            </div>
+            <div className={styles.mailPreview}>
+              Bonjour, votre colis n°FR882341 est en attente de livraison...
+            </div>
           </div>
 
           {/* Mails lus (décor) */}
@@ -90,8 +104,12 @@ export default function LaPosteScenario() {
               Mairie de Savigny
               <span className={styles.mailDateSmall}>Hier</span>
             </div>
-            <div className={styles.mailSubjectSmall}>Bulletin municipal — Mars 2026</div>
-            <div className={styles.mailPreview}>Retrouvez les actualités de votre commune...</div>
+            <div className={styles.mailSubjectSmall}>
+              Bulletin municipal — Mars 2026
+            </div>
+            <div className={styles.mailPreview}>
+              Retrouvez les actualités de votre commune...
+            </div>
           </div>
 
           <div className={styles.mailItem}>
@@ -99,8 +117,12 @@ export default function LaPosteScenario() {
               Caisse Retraite
               <span className={styles.mailDateSmall}>Lun.</span>
             </div>
-            <div className={styles.mailSubjectSmall}>Votre relevé trimestriel</div>
-            <div className={styles.mailPreview}>Madame, Monsieur, veuillez trouver ci-joint...</div>
+            <div className={styles.mailSubjectSmall}>
+              Votre relevé trimestriel
+            </div>
+            <div className={styles.mailPreview}>
+              Madame, Monsieur, veuillez trouver ci-joint...
+            </div>
           </div>
         </div>
 
@@ -121,9 +143,13 @@ export default function LaPosteScenario() {
             <div className={styles.mailMeta}>
               <div className={styles.senderAvatar}>📦</div>
               <div className={styles.senderInfo}>
-                <div className={styles.senderName}>La Poste — Service Livraison</div>
+                <div className={styles.senderName}>
+                  La Poste — Service Livraison
+                </div>
                 {/* Adresse suspecte : laposte.livraison@notifications-poste.com */}
-                <div className={styles.senderEmail}>laposte.livraison@notifications-poste.com</div>
+                <div className={styles.senderEmail}>
+                  laposte.livraison@notifications-poste.com
+                </div>
               </div>
               <div className={styles.mailDate}>Aujourd'hui à 08:47</div>
             </div>
@@ -133,33 +159,40 @@ export default function LaPosteScenario() {
               <div className={styles.emailHeaderBand}>
                 {/* Logo La Poste approximatif — couleur jaune/or légèrement différente */}
                 <div className={styles.laposteLogo}>La Poste</div>
-                <div className={styles.laposteTagline}>Le service qui vous rapproche</div>
+                <div className={styles.laposteTagline}>
+                  Le service qui vous rapproche
+                </div>
               </div>
 
               <div className={styles.emailBody}>
                 <div className={styles.emailAlertBox}>
-                  <strong>⚠️ Votre colis est en attente — Action requise avant 23h59</strong>
-                  Un problème a été détecté lors de la livraison de votre colis. Un règlement de{' '}
-                  <strong>2,49 €</strong> est nécessaire pour finaliser la livraison.
+                  <strong>
+                    ⚠️ Votre colis est en attente — Action requise avant 23h59
+                  </strong>
+                  Un problème a été détecté lors de la livraison de votre colis.
+                  Un règlement de <strong>2,49 €</strong> est nécessaire pour
+                  finaliser la livraison.
                 </div>
 
                 <p>Bonjour,</p>
 
                 <p>
-                  Nous vous informons que votre colis portant le numéro de suivi{' '}
-                  <span className={styles.highlight}>FR882341XP</span> n'a pas pu être livré à
-                  votre adresse en raison de <strong>frais de douane impayés</strong>.
+                  Nous vous informons que votre colis portant le numéro de suivi{" "}
+                  <span className={styles.highlight}>FR882341XP</span> n'a pas
+                  pu être livré à votre adresse en raison de{" "}
+                  <strong>frais de douane impayés</strong>.
                 </p>
 
                 <p>
-                  Afin d'éviter le renvoi de votre colis à l'expéditeur, nous vous invitons à
-                  régler la somme de <span className={styles.highlight}>2,49 €</span> avant ce
-                  soir à 23h59.
+                  Afin d'éviter le renvoi de votre colis à l'expéditeur, nous
+                  vous invitons à régler la somme de{" "}
+                  <span className={styles.highlight}>2,49 €</span> avant ce soir
+                  à 23h59.
                 </p>
 
                 <p>
-                  Passé ce délai, votre colis sera automatiquement retourné et des frais
-                  supplémentaires pourront être appliqués.
+                  Passé ce délai, votre colis sera automatiquement retourné et
+                  des frais supplémentaires pourront être appliqués.
                 </p>
 
                 <div className={styles.ctaSection}>
@@ -168,21 +201,26 @@ export default function LaPosteScenario() {
                   </button>
                   {/* URL sous le bouton — très suspecte si on la lit */}
                   <span className={styles.ctaUrl}>
-                    → http://laposte-paiement-rapide.xyz/fr/checkout?ref=FR882341XP
+                    →
+                    http://laposte-paiement-rapide.xyz/fr/checkout?ref=FR882341XP
                   </span>
                 </div>
 
                 <p className={styles.signoff}>
-                  Cordialement,<br />
-                  <strong>Le Service Clientèle La Poste</strong><br />
+                  Cordialement,
+                  <br />
+                  <strong>Le Service Clientèle La Poste</strong>
+                  <br />
                   Numéro de dossier : #LPF-2026-882341
                 </p>
               </div>
 
               <div className={styles.emailFooter}>
-                Ce message a été envoyé automatiquement par notre système de notification.
-                Merci de ne pas répondre directement à cet e-mail.<br />
-                La Poste SA — 9 rue du Colonel Pierre Avia, 75015 Paris — <em>laposte.fr</em>
+                Ce message a été envoyé automatiquement par notre système de
+                notification. Merci de ne pas répondre directement à cet e-mail.
+                <br />
+                La Poste SA — 9 rue du Colonel Pierre Avia, 75015 Paris —{" "}
+                <em>laposte.fr</em>
               </div>
             </div>
           </div>
@@ -190,10 +228,7 @@ export default function LaPosteScenario() {
       </div>
 
       {/* Panneau animateur */}
-      <AnimatorPanel
-        title="Les 5 indices à faire trouver"
-        indices={INDICES}
-      />
+      <AnimatorPanel title="Les 5 indices à faire trouver" indices={INDICES} />
     </div>
-  )
+  );
 }

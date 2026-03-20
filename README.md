@@ -31,22 +31,22 @@ Ouvre ensuite `http://localhost:5173` dans le navigateur, mets-le en plein écra
 
 ```
 src/
-├── App.jsx                  # Routeur principal (une route par scénario)
-├── index.css                # Reset CSS global
-├── main.jsx                 # Point d'entrée React
+├-- App.jsx                  # Routeur principal (une route par scénario)
+├-- index.css                # Reset CSS global
+├-- main.jsx                 # Point d'entrée React
 │
-├── pages/
-│   ├── HomePage.jsx         # Page d'accueil — liste des scénarios
-│   └── HomePage.module.css
+├-- pages/
+│   ├-- HomePage.jsx         # Page d'accueil — liste des scénarios
+│   └-- HomePage.module.css
 │
-├── components/
-│   ├── AnimatorPanel.jsx    # Panneau "Révéler les indices" (réutilisable)
-│   └── AnimatorPanel.module.css
+├-- components/
+│   ├-- AnimatorPanel.jsx    # Panneau "Révéler les indices" (réutilisable)
+│   └-- AnimatorPanel.module.css
 │
-└── scenarios/
-    └── laposte/             # Scénario : faux mail La Poste
-        ├── LaPosteScenario.jsx
-        └── LaPosteScenario.module.css
+└-- scenarios/
+    └-- laposte/             # Scénario : faux mail La Poste
+        ├-- LaPosteScenario.jsx
+        └-- LaPosteScenario.module.css
 ```
 
 ---

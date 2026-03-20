@@ -1,653 +1,758 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="fr">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Boîte mail — Maxime</title>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
-<style>
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-
-  body {
-    font-family: 'DM Sans', sans-serif;
-    background: #f0f2f5;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-  }
-
-  /* ── BARRE NAVIGATEUR SIMULÉE ── */
-  .browser-bar {
-    background: #2b2b2b;
-    padding: 0.6rem 1rem;
-    display: flex;
-    align-items: center;
-    gap: 0.8rem;
-  }
-
-  .browser-dots {
-    display: flex;
-    gap: 5px;
-  }
-
-  .dot {
-    width: 12px; height: 12px;
-    border-radius: 50%;
-  }
-  .dot-r { background: #ff5f57; }
-  .dot-y { background: #febc2e; }
-  .dot-g { background: #28c840; }
-
-  .browser-url {
-    flex: 1;
-    background: #3d3d3d;
-    border-radius: 6px;
-    padding: 0.35rem 0.8rem;
-    color: #ccc;
-    font-size: 0.82rem;
-    display: flex;
-    align-items: center;
-    gap: 0.4rem;
-  }
-
-  /* L'URL contient une subtile faute : laposte-espace-client.net au lieu de laposte.fr */
-  .url-text { color: #aaa; }
-  .url-highlight { color: #ff9f43; } /* La partie suspecte en orange discret */
-
-  /* ── CLIENT MAIL SIMULÉ ── */
-  .mail-app {
-    display: flex;
-    flex: 1;
-    min-height: calc(100vh - 42px);
-  }
-
-  /* Sidebar */
-  .sidebar {
-    width: 220px;
-    background: #1c1c1e;
-    color: #aeaeb2;
-    padding: 1.5rem 0;
-    flex-shrink: 0;
-  }
-
-  .sidebar-logo {
-    padding: 0 1.2rem 1.5rem;
-    font-size: 1rem;
-    font-weight: 600;
-    color: white;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-  }
-
-  .sidebar-item {
-    padding: 0.55rem 1.2rem;
-    font-size: 0.85rem;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 0.6rem;
-    border-radius: 0;
-    transition: background 0.15s;
-  }
-
-  .sidebar-item.active {
-    background: #2c2c2e;
-    color: white;
-  }
-
-  .badge {
-    margin-left: auto;
-    background: #e74c3c;
-    color: white;
-    border-radius: 10px;
-    padding: 0.1rem 0.5rem;
-    font-size: 0.72rem;
-    font-weight: 600;
-  }
-
-  /* Liste des mails */
-  .mail-list {
-    width: 300px;
-    background: #ffffff;
-    border-right: 1px solid #e5e5ea;
-    overflow-y: auto;
-    flex-shrink: 0;
-  }
-
-  .mail-list-header {
-    padding: 1rem 1.2rem 0.8rem;
-    border-bottom: 1px solid #e5e5ea;
-    font-size: 0.78rem;
-    font-weight: 600;
-    color: #8e8e93;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-  }
-
-  .mail-item {
-    padding: 0.9rem 1.2rem;
-    border-bottom: 1px solid #f2f2f7;
-    cursor: pointer;
-    transition: background 0.15s;
-  }
-
-  .mail-item:hover { background: #f9f9fb; }
-
-  .mail-item.unread .mail-sender {
-    font-weight: 600;
-    color: #1c1c1e;
-  }
-
-  .mail-item.active {
-    background: #e8f0fe;
-    border-left: 3px solid #e74c3c;
-  }
-
-  .mail-item.unread::before {
-    content: '';
-    display: inline-block;
-  }
-
-  .mail-sender {
-    font-size: 0.88rem;
-    color: #3a3a3c;
-    margin-bottom: 0.2rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  .mail-date-small {
-    font-size: 0.72rem;
-    color: #8e8e93;
-    font-weight: 400;
-    white-space: nowrap;
-  }
-
-  .mail-subject-small {
-    font-size: 0.82rem;
-    color: #3a3a3c;
-    margin-bottom: 0.15rem;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-
-  .mail-preview {
-    font-size: 0.78rem;
-    color: #8e8e93;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-
-  .unread-dot {
-    width: 8px; height: 8px;
-    background: #e74c3c;
-    border-radius: 50%;
-    flex-shrink: 0;
-    margin-right: 0.4rem;
-  }
-
-  /* Panneau mail ouvert */
-  .mail-content {
-    flex: 1;
-    background: #ffffff;
-    overflow-y: auto;
-    display: flex;
-    flex-direction: column;
-  }
-
-  .mail-toolbar {
-    padding: 0.8rem 2rem;
-    border-bottom: 1px solid #e5e5ea;
-    display: flex;
-    gap: 1rem;
-    align-items: center;
-  }
-
-  .toolbar-btn {
-    background: none;
-    border: 1px solid #d1d1d6;
-    border-radius: 6px;
-    padding: 0.35rem 0.9rem;
-    font-size: 0.8rem;
-    cursor: pointer;
-    color: #3a3a3c;
-    font-family: 'DM Sans', sans-serif;
-    transition: background 0.15s;
-  }
-
-  .toolbar-btn:hover { background: #f2f2f7; }
-
-  .mail-body {
-    padding: 2.5rem 3rem;
-    max-width: 700px;
-  }
-
-  .mail-subject {
-    font-size: 1.3rem;
-    font-weight: 600;
-    color: #1c1c1e;
-    margin-bottom: 1.2rem;
-    display: flex;
-    align-items: center;
-    gap: 0.6rem;
-  }
-
-  .urgent-tag {
-    background: #e74c3c;
-    color: white;
-    font-size: 0.7rem;
-    padding: 0.2rem 0.6rem;
-    border-radius: 4px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-  }
-
-  .mail-meta {
-    display: flex;
-    align-items: flex-start;
-    gap: 0.8rem;
-    margin-bottom: 2rem;
-    padding-bottom: 1.2rem;
-    border-bottom: 1px solid #f2f2f7;
-  }
-
-  .sender-avatar {
-    width: 40px; height: 40px;
-    background: #e8f5e9;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.1rem;
-    flex-shrink: 0;
-  }
-
-  .sender-info { flex: 1; }
-
-  .sender-name {
-    font-weight: 600;
-    font-size: 0.9rem;
-    color: #1c1c1e;
-  }
-
-  /* L'adresse email est suspecte mais pas hurlante */
-  .sender-email {
-    font-size: 0.78rem;
-    color: #8e8e93;
-    margin-top: 0.1rem;
-  }
-
-  .mail-date {
-    font-size: 0.78rem;
-    color: #8e8e93;
-  }
-
-  /* Corps du mail */
-  .email-container {
-    background: #f9f9f9;
-    border: 1px solid #e5e5ea;
-    border-radius: 8px;
-    overflow: hidden;
-    font-size: 0.9rem;
-    line-height: 1.7;
-    color: #3a3a3c;
-  }
-
-  .email-header-band {
-    background: #ffff;
-    padding: 1.5rem 2rem 1rem;
-    border-bottom: 3px solid #f5a623;
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-  }
-
-  /* Logo La Poste approximatif — couleur jaune/OR mais légèrement différente */
-  .laposte-logo {
-    background: #f5a623;
-    color: white;
-    font-weight: 800;
-    font-size: 0.85rem;
-    padding: 0.5rem 1rem;
-    border-radius: 4px;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-  }
-
-  .laposte-tagline {
-    font-size: 0.75rem;
-    color: #8e8e93;
-    font-style: italic;
-  }
-
-  .email-body {
-    padding: 2rem;
-  }
-
-  .email-alert-box {
-    background: #fff3cd;
-    border: 1px solid #ffc107;
-    border-left: 4px solid #e74c3c;
-    border-radius: 6px;
-    padding: 1rem 1.2rem;
-    margin-bottom: 1.5rem;
-    font-size: 0.88rem;
-  }
-
-  .email-alert-box strong {
-    display: block;
-    margin-bottom: 0.3rem;
-    color: #c0392b;
-  }
-
-  .email-body p {
-    margin-bottom: 1rem;
-    font-size: 0.88rem;
-  }
-
-  .email-body .highlight {
-    font-weight: 600;
-    color: #c0392b;
-  }
-
-  /* Bouton CTA — le vrai piège */
-  .cta-section {
-    text-align: center;
-    padding: 1.5rem 0;
-  }
-
-  .cta-btn {
-    display: inline-block;
-    background: #f5a623;
-    color: white;
-    padding: 0.9rem 2.5rem;
-    border-radius: 6px;
-    font-weight: 700;
-    font-size: 0.95rem;
-    text-decoration: none;
-    cursor: pointer;
-    font-family: 'DM Sans', sans-serif;
-    border: none;
-    transition: filter 0.2s;
-  }
-
-  .cta-btn:hover { filter: brightness(1.08); }
-
-  /* L'URL sous le bouton — très suspecte si on la lit */
-  .cta-url {
-    display: block;
-    margin-top: 0.5rem;
-    font-size: 0.7rem;
-    color: #aaa;
-  }
-
-  .email-footer {
-    background: #f2f2f7;
-    padding: 1rem 2rem;
-    font-size: 0.72rem;
-    color: #8e8e93;
-    line-height: 1.6;
-    border-top: 1px solid #e5e5ea;
-  }
-
-  /* ── PANNEAU INDICES (caché, révélé par l'animateur) ── */
-  .indices-panel {
-    display: none;
-    position: fixed;
-    bottom: 0; left: 0; right: 0;
-    background: #1c1c1e;
-    color: white;
-    padding: 1.5rem 2rem;
-    z-index: 999;
-    border-top: 3px solid #e74c3c;
-    animation: slideUp 0.4s ease;
-  }
-
-  .indices-panel.show { display: block; }
-
-  @keyframes slideUp {
-    from { transform: translateY(100%); }
-    to { transform: translateY(0); }
-  }
-
-  .indices-title {
-    font-weight: 700;
-    color: #e74c3c;
-    margin-bottom: 1rem;
-    font-size: 1rem;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-  }
-
-  .indices-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 0.8rem;
-  }
-
-  .indice {
-    background: #2c2c2e;
-    border-radius: 8px;
-    padding: 0.8rem 1rem;
-    font-size: 0.82rem;
-    display: flex;
-    gap: 0.6rem;
-    align-items: flex-start;
-    line-height: 1.5;
-    border-left: 3px solid #e74c3c;
-  }
-
-  .indice-num {
-    color: #e74c3c;
-    font-weight: 700;
-    flex-shrink: 0;
-    font-size: 0.9rem;
-  }
-
-  .close-indices {
-    position: absolute;
-    top: 1rem; right: 1.5rem;
-    background: none;
-    border: none;
-    color: #8e8e93;
-    font-size: 1.2rem;
-    cursor: pointer;
-  }
-
-  /* Bouton animateur discret */
-  .animateur-btn {
-    position: fixed;
-    bottom: 1.5rem;
-    right: 1.5rem;
-    background: #1c1c1e;
-    color: #aaa;
-    border: 1px solid #3d3d3d;
-    border-radius: 2rem;
-    padding: 0.5rem 1.2rem;
-    font-size: 0.75rem;
-    cursor: pointer;
-    font-family: 'DM Sans', sans-serif;
-    z-index: 1000;
-    transition: all 0.2s;
-  }
-
-  .animateur-btn:hover {
-    background: #e74c3c;
-    color: white;
-    border-color: #e74c3c;
-  }
-</style>
-</head>
-<body>
-
-<!-- Barre navigateur simulée -->
-<div class="browser-bar">
-  <div class="browser-dots">
-    <div class="dot dot-r"></div>
-    <div class="dot dot-y"></div>
-    <div class="dot dot-g"></div>
-  </div>
-  <div class="browser-url">
-    🔒 <span class="url-text">https://</span><span class="url-highlight">laposte-espace-client.net</span><span class="url-text">/mail</span>
-  </div>
-</div>
-
-<!-- App mail -->
-<div class="mail-app">
-
-  <!-- Sidebar -->
-  <div class="sidebar">
-    <div class="sidebar-logo">✉️ MonMail</div>
-    <div class="sidebar-item active">📥 Boîte de réception <span class="badge">1</span></div>
-    <div class="sidebar-item">⭐ Favoris</div>
-    <div class="sidebar-item">📤 Envoyés</div>
-    <div class="sidebar-item">📁 Archives</div>
-    <div class="sidebar-item">🗑️ Corbeille</div>
-  </div>
-
-  <!-- Liste mails -->
-  <div class="mail-list">
-    <div class="mail-list-header">Boîte de réception (1 non lu)</div>
-
-    <!-- Mail arnaque — non lu, actif -->
-    <div class="mail-item unread active">
-      <div class="mail-sender">
-        <div style="display:flex;align-items:center;gap:0.4rem;">
-          <div class="unread-dot"></div>
-          La Poste — Service Client
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Boîte mail — Maxime</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "DM Sans", sans-serif;
+        background: #f0f2f5;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
+
+      /* -- BARRE NAVIGATEUR SIMULÉE -- */
+      .browser-bar {
+        background: #2b2b2b;
+        padding: 0.6rem 1rem;
+        display: flex;
+        align-items: center;
+        gap: 0.8rem;
+      }
+
+      .browser-dots {
+        display: flex;
+        gap: 5px;
+      }
+
+      .dot {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+      }
+      .dot-r {
+        background: #ff5f57;
+      }
+      .dot-y {
+        background: #febc2e;
+      }
+      .dot-g {
+        background: #28c840;
+      }
+
+      .browser-url {
+        flex: 1;
+        background: #3d3d3d;
+        border-radius: 6px;
+        padding: 0.35rem 0.8rem;
+        color: #ccc;
+        font-size: 0.82rem;
+        display: flex;
+        align-items: center;
+        gap: 0.4rem;
+      }
+
+      /* L'URL contient une subtile faute : laposte-espace-client.net au lieu de laposte.fr */
+      .url-text {
+        color: #aaa;
+      }
+      .url-highlight {
+        color: #ff9f43;
+      } /* La partie suspecte en orange discret */
+
+      /* -- CLIENT MAIL SIMULÉ -- */
+      .mail-app {
+        display: flex;
+        flex: 1;
+        min-height: calc(100vh - 42px);
+      }
+
+      /* Sidebar */
+      .sidebar {
+        width: 220px;
+        background: #1c1c1e;
+        color: #aeaeb2;
+        padding: 1.5rem 0;
+        flex-shrink: 0;
+      }
+
+      .sidebar-logo {
+        padding: 0 1.2rem 1.5rem;
+        font-size: 1rem;
+        font-weight: 600;
+        color: white;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .sidebar-item {
+        padding: 0.55rem 1.2rem;
+        font-size: 0.85rem;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
+        border-radius: 0;
+        transition: background 0.15s;
+      }
+
+      .sidebar-item.active {
+        background: #2c2c2e;
+        color: white;
+      }
+
+      .badge {
+        margin-left: auto;
+        background: #e74c3c;
+        color: white;
+        border-radius: 10px;
+        padding: 0.1rem 0.5rem;
+        font-size: 0.72rem;
+        font-weight: 600;
+      }
+
+      /* Liste des mails */
+      .mail-list {
+        width: 300px;
+        background: #ffffff;
+        border-right: 1px solid #e5e5ea;
+        overflow-y: auto;
+        flex-shrink: 0;
+      }
+
+      .mail-list-header {
+        padding: 1rem 1.2rem 0.8rem;
+        border-bottom: 1px solid #e5e5ea;
+        font-size: 0.78rem;
+        font-weight: 600;
+        color: #8e8e93;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+      }
+
+      .mail-item {
+        padding: 0.9rem 1.2rem;
+        border-bottom: 1px solid #f2f2f7;
+        cursor: pointer;
+        transition: background 0.15s;
+      }
+
+      .mail-item:hover {
+        background: #f9f9fb;
+      }
+
+      .mail-item.unread .mail-sender {
+        font-weight: 600;
+        color: #1c1c1e;
+      }
+
+      .mail-item.active {
+        background: #e8f0fe;
+        border-left: 3px solid #e74c3c;
+      }
+
+      .mail-item.unread::before {
+        content: "";
+        display: inline-block;
+      }
+
+      .mail-sender {
+        font-size: 0.88rem;
+        color: #3a3a3c;
+        margin-bottom: 0.2rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .mail-date-small {
+        font-size: 0.72rem;
+        color: #8e8e93;
+        font-weight: 400;
+        white-space: nowrap;
+      }
+
+      .mail-subject-small {
+        font-size: 0.82rem;
+        color: #3a3a3c;
+        margin-bottom: 0.15rem;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      .mail-preview {
+        font-size: 0.78rem;
+        color: #8e8e93;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      .unread-dot {
+        width: 8px;
+        height: 8px;
+        background: #e74c3c;
+        border-radius: 50%;
+        flex-shrink: 0;
+        margin-right: 0.4rem;
+      }
+
+      /* Panneau mail ouvert */
+      .mail-content {
+        flex: 1;
+        background: #ffffff;
+        overflow-y: auto;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .mail-toolbar {
+        padding: 0.8rem 2rem;
+        border-bottom: 1px solid #e5e5ea;
+        display: flex;
+        gap: 1rem;
+        align-items: center;
+      }
+
+      .toolbar-btn {
+        background: none;
+        border: 1px solid #d1d1d6;
+        border-radius: 6px;
+        padding: 0.35rem 0.9rem;
+        font-size: 0.8rem;
+        cursor: pointer;
+        color: #3a3a3c;
+        font-family: "DM Sans", sans-serif;
+        transition: background 0.15s;
+      }
+
+      .toolbar-btn:hover {
+        background: #f2f2f7;
+      }
+
+      .mail-body {
+        padding: 2.5rem 3rem;
+        max-width: 700px;
+      }
+
+      .mail-subject {
+        font-size: 1.3rem;
+        font-weight: 600;
+        color: #1c1c1e;
+        margin-bottom: 1.2rem;
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
+      }
+
+      .urgent-tag {
+        background: #e74c3c;
+        color: white;
+        font-size: 0.7rem;
+        padding: 0.2rem 0.6rem;
+        border-radius: 4px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+      }
+
+      .mail-meta {
+        display: flex;
+        align-items: flex-start;
+        gap: 0.8rem;
+        margin-bottom: 2rem;
+        padding-bottom: 1.2rem;
+        border-bottom: 1px solid #f2f2f7;
+      }
+
+      .sender-avatar {
+        width: 40px;
+        height: 40px;
+        background: #e8f5e9;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.1rem;
+        flex-shrink: 0;
+      }
+
+      .sender-info {
+        flex: 1;
+      }
+
+      .sender-name {
+        font-weight: 600;
+        font-size: 0.9rem;
+        color: #1c1c1e;
+      }
+
+      /* L'adresse email est suspecte mais pas hurlante */
+      .sender-email {
+        font-size: 0.78rem;
+        color: #8e8e93;
+        margin-top: 0.1rem;
+      }
+
+      .mail-date {
+        font-size: 0.78rem;
+        color: #8e8e93;
+      }
+
+      /* Corps du mail */
+      .email-container {
+        background: #f9f9f9;
+        border: 1px solid #e5e5ea;
+        border-radius: 8px;
+        overflow: hidden;
+        font-size: 0.9rem;
+        line-height: 1.7;
+        color: #3a3a3c;
+      }
+
+      .email-header-band {
+        background: #ffff;
+        padding: 1.5rem 2rem 1rem;
+        border-bottom: 3px solid #f5a623;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+      }
+
+      /* Logo La Poste approximatif — couleur jaune/OR mais légèrement différente */
+      .laposte-logo {
+        background: #f5a623;
+        color: white;
+        font-weight: 800;
+        font-size: 0.85rem;
+        padding: 0.5rem 1rem;
+        border-radius: 4px;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+      }
+
+      .laposte-tagline {
+        font-size: 0.75rem;
+        color: #8e8e93;
+        font-style: italic;
+      }
+
+      .email-body {
+        padding: 2rem;
+      }
+
+      .email-alert-box {
+        background: #fff3cd;
+        border: 1px solid #ffc107;
+        border-left: 4px solid #e74c3c;
+        border-radius: 6px;
+        padding: 1rem 1.2rem;
+        margin-bottom: 1.5rem;
+        font-size: 0.88rem;
+      }
+
+      .email-alert-box strong {
+        display: block;
+        margin-bottom: 0.3rem;
+        color: #c0392b;
+      }
+
+      .email-body p {
+        margin-bottom: 1rem;
+        font-size: 0.88rem;
+      }
+
+      .email-body .highlight {
+        font-weight: 600;
+        color: #c0392b;
+      }
+
+      /* Bouton CTA — le vrai piège */
+      .cta-section {
+        text-align: center;
+        padding: 1.5rem 0;
+      }
+
+      .cta-btn {
+        display: inline-block;
+        background: #f5a623;
+        color: white;
+        padding: 0.9rem 2.5rem;
+        border-radius: 6px;
+        font-weight: 700;
+        font-size: 0.95rem;
+        text-decoration: none;
+        cursor: pointer;
+        font-family: "DM Sans", sans-serif;
+        border: none;
+        transition: filter 0.2s;
+      }
+
+      .cta-btn:hover {
+        filter: brightness(1.08);
+      }
+
+      /* L'URL sous le bouton — très suspecte si on la lit */
+      .cta-url {
+        display: block;
+        margin-top: 0.5rem;
+        font-size: 0.7rem;
+        color: #aaa;
+      }
+
+      .email-footer {
+        background: #f2f2f7;
+        padding: 1rem 2rem;
+        font-size: 0.72rem;
+        color: #8e8e93;
+        line-height: 1.6;
+        border-top: 1px solid #e5e5ea;
+      }
+
+      /* -- PANNEAU INDICES (caché, révélé par l'animateur) -- */
+      .indices-panel {
+        display: none;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: #1c1c1e;
+        color: white;
+        padding: 1.5rem 2rem;
+        z-index: 999;
+        border-top: 3px solid #e74c3c;
+        animation: slideUp 0.4s ease;
+      }
+
+      .indices-panel.show {
+        display: block;
+      }
+
+      @keyframes slideUp {
+        from {
+          transform: translateY(100%);
+        }
+        to {
+          transform: translateY(0);
+        }
+      }
+
+      .indices-title {
+        font-weight: 700;
+        color: #e74c3c;
+        margin-bottom: 1rem;
+        font-size: 1rem;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+      }
+
+      .indices-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 0.8rem;
+      }
+
+      .indice {
+        background: #2c2c2e;
+        border-radius: 8px;
+        padding: 0.8rem 1rem;
+        font-size: 0.82rem;
+        display: flex;
+        gap: 0.6rem;
+        align-items: flex-start;
+        line-height: 1.5;
+        border-left: 3px solid #e74c3c;
+      }
+
+      .indice-num {
+        color: #e74c3c;
+        font-weight: 700;
+        flex-shrink: 0;
+        font-size: 0.9rem;
+      }
+
+      .close-indices {
+        position: absolute;
+        top: 1rem;
+        right: 1.5rem;
+        background: none;
+        border: none;
+        color: #8e8e93;
+        font-size: 1.2rem;
+        cursor: pointer;
+      }
+
+      /* Bouton animateur discret */
+      .animateur-btn {
+        position: fixed;
+        bottom: 1.5rem;
+        right: 1.5rem;
+        background: #1c1c1e;
+        color: #aaa;
+        border: 1px solid #3d3d3d;
+        border-radius: 2rem;
+        padding: 0.5rem 1.2rem;
+        font-size: 0.75rem;
+        cursor: pointer;
+        font-family: "DM Sans", sans-serif;
+        z-index: 1000;
+        transition: all 0.2s;
+      }
+
+      .animateur-btn:hover {
+        background: #e74c3c;
+        color: white;
+        border-color: #e74c3c;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Barre navigateur simulée -->
+    <div class="browser-bar">
+      <div class="browser-dots">
+        <div class="dot dot-r"></div>
+        <div class="dot dot-y"></div>
+        <div class="dot dot-g"></div>
+      </div>
+      <div class="browser-url">
+        🔒 <span class="url-text">https://</span
+        ><span class="url-highlight">laposte-espace-client.net</span
+        ><span class="url-text">/mail</span>
+      </div>
+    </div>
+
+    <!-- App mail -->
+    <div class="mail-app">
+      <!-- Sidebar -->
+      <div class="sidebar">
+        <div class="sidebar-logo">✉️ MonMail</div>
+        <div class="sidebar-item active">
+          📥 Boîte de réception <span class="badge">1</span>
         </div>
-        <span class="mail-date-small">Aujourd'hui, 08:47</span>
-      </div>
-      <div class="mail-subject-small">⚠️ Action requise : votre colis en attente</div>
-      <div class="mail-preview">Bonjour, votre colis n°FR882341 est en attente de livraison...</div>
-    </div>
-
-    <!-- Autres mails lus (décor) -->
-    <div class="mail-item">
-      <div class="mail-sender">
-        Mairie de Savigny
-        <span class="mail-date-small">Hier</span>
-      </div>
-      <div class="mail-subject-small">Bulletin municipal — Mars 2026</div>
-      <div class="mail-preview">Retrouvez les actualités de votre commune...</div>
-    </div>
-
-    <div class="mail-item">
-      <div class="mail-sender">
-        Caisse Retraite
-        <span class="mail-date-small">Lun.</span>
-      </div>
-      <div class="mail-subject-small">Votre relevé trimestriel</div>
-      <div class="mail-preview">Madame, Monsieur, veuillez trouver ci-joint...</div>
-    </div>
-  </div>
-
-  <!-- Corps du mail -->
-  <div class="mail-content">
-    <div class="mail-toolbar">
-      <button class="toolbar-btn">↩ Répondre</button>
-      <button class="toolbar-btn">→ Transférer</button>
-      <button class="toolbar-btn">🗑 Supprimer</button>
-    </div>
-
-    <div class="mail-body">
-      <div class="mail-subject">
-        ⚠️ Action requise : votre colis en attente de livraison
-        <span class="urgent-tag">Urgent</span>
+        <div class="sidebar-item">⭐ Favoris</div>
+        <div class="sidebar-item">📤 Envoyés</div>
+        <div class="sidebar-item">📁 Archives</div>
+        <div class="sidebar-item">🗑️ Corbeille</div>
       </div>
 
-      <div class="mail-meta">
-        <div class="sender-avatar">📦</div>
-        <div class="sender-info">
-          <div class="sender-name">La Poste — Service Livraison</div>
-          <!-- Adresse suspecte : laposte.livraison@notifications-poste.com -->
-          <div class="sender-email">laposte.livraison@notifications-poste.com</div>
-        </div>
-        <div class="mail-date">Aujourd'hui à 08:47</div>
-      </div>
+      <!-- Liste mails -->
+      <div class="mail-list">
+        <div class="mail-list-header">Boîte de réception (1 non lu)</div>
 
-      <!-- Le mail en lui-même -->
-      <div class="email-container">
-        <div class="email-header-band">
-          <div class="laposte-logo">La Poste</div>
-          <div class="laposte-tagline">Le service qui vous rapproche</div>
+        <!-- Mail arnaque — non lu, actif -->
+        <div class="mail-item unread active">
+          <div class="mail-sender">
+            <div style="display: flex; align-items: center; gap: 0.4rem">
+              <div class="unread-dot"></div>
+              La Poste — Service Client
+            </div>
+            <span class="mail-date-small">Aujourd'hui, 08:47</span>
+          </div>
+          <div class="mail-subject-small">
+            ⚠️ Action requise : votre colis en attente
+          </div>
+          <div class="mail-preview">
+            Bonjour, votre colis n°FR882341 est en attente de livraison...
+          </div>
         </div>
 
-        <div class="email-body">
-          <div class="email-alert-box">
-            <strong>⚠️ Votre colis est en attente — Action requise avant 23h59</strong>
-            Un problème a été détecté lors de la livraison de votre colis. Un règlement de <strong>2,49 €</strong> est nécessaire pour finaliser la livraison.
+        <!-- Autres mails lus (décor) -->
+        <div class="mail-item">
+          <div class="mail-sender">
+            Mairie de Savigny
+            <span class="mail-date-small">Hier</span>
+          </div>
+          <div class="mail-subject-small">Bulletin municipal — Mars 2026</div>
+          <div class="mail-preview">
+            Retrouvez les actualités de votre commune...
+          </div>
+        </div>
+
+        <div class="mail-item">
+          <div class="mail-sender">
+            Caisse Retraite
+            <span class="mail-date-small">Lun.</span>
+          </div>
+          <div class="mail-subject-small">Votre relevé trimestriel</div>
+          <div class="mail-preview">
+            Madame, Monsieur, veuillez trouver ci-joint...
+          </div>
+        </div>
+      </div>
+
+      <!-- Corps du mail -->
+      <div class="mail-content">
+        <div class="mail-toolbar">
+          <button class="toolbar-btn">↩ Répondre</button>
+          <button class="toolbar-btn">→ Transférer</button>
+          <button class="toolbar-btn">🗑 Supprimer</button>
+        </div>
+
+        <div class="mail-body">
+          <div class="mail-subject">
+            ⚠️ Action requise : votre colis en attente de livraison
+            <span class="urgent-tag">Urgent</span>
           </div>
 
-          <p>Bonjour,</p>
-
-          <p>Nous vous informons que votre colis portant le numéro de suivi <span class="highlight">FR882341XP</span> n'a pas pu être livré à votre adresse en raison de <strong>frais de douane impayés</strong>.</p>
-
-          <p>Afin d'éviter le renvoi de votre colis à l'expéditeur, nous vous invitons à régler la somme de <span class="highlight">2,49 €</span> avant ce soir à 23h59.</p>
-
-          <p>Passé ce délai, votre colis sera automatiquement retourné et des frais supplémentaires pourront être appliqués.</p>
-
-          <div class="cta-section">
-            <button class="cta-btn" onclick="alert('📌 Astuce : en vrai, ce bouton mènerait vers un faux site de paiement. On en reparlera !')">
-              Régler mes frais de livraison →
-            </button>
-            <span class="cta-url">→ http://laposte-paiement-rapide.xyz/fr/checkout?ref=FR882341XP</span>
+          <div class="mail-meta">
+            <div class="sender-avatar">📦</div>
+            <div class="sender-info">
+              <div class="sender-name">La Poste — Service Livraison</div>
+              <!-- Adresse suspecte : laposte.livraison@notifications-poste.com -->
+              <div class="sender-email">
+                laposte.livraison@notifications-poste.com
+              </div>
+            </div>
+            <div class="mail-date">Aujourd'hui à 08:47</div>
           </div>
 
-          <p style="font-size:0.82rem; color:#8e8e93; margin-top:1rem;">
-            Cordialement,<br>
-            <strong>Le Service Clientèle La Poste</strong><br>
-            Numéro de dossier : #LPF-2026-882341
-          </p>
-        </div>
+          <!-- Le mail en lui-même -->
+          <div class="email-container">
+            <div class="email-header-band">
+              <div class="laposte-logo">La Poste</div>
+              <div class="laposte-tagline">Le service qui vous rapproche</div>
+            </div>
 
-        <div class="email-footer">
-          Ce message a été envoyé automatiquement par notre système de notification. Merci de ne pas répondre directement à cet e-mail.<br>
-          La Poste SA — 9 rue du Colonel Pierre Avia, 75015 Paris — <em>laposte.fr</em>
+            <div class="email-body">
+              <div class="email-alert-box">
+                <strong
+                  >⚠️ Votre colis est en attente — Action requise avant
+                  23h59</strong
+                >
+                Un problème a été détecté lors de la livraison de votre colis.
+                Un règlement de <strong>2,49 €</strong> est nécessaire pour
+                finaliser la livraison.
+              </div>
+
+              <p>Bonjour,</p>
+
+              <p>
+                Nous vous informons que votre colis portant le numéro de suivi
+                <span class="highlight">FR882341XP</span> n'a pas pu être livré
+                à votre adresse en raison de
+                <strong>frais de douane impayés</strong>.
+              </p>
+
+              <p>
+                Afin d'éviter le renvoi de votre colis à l'expéditeur, nous vous
+                invitons à régler la somme de
+                <span class="highlight">2,49 €</span> avant ce soir à 23h59.
+              </p>
+
+              <p>
+                Passé ce délai, votre colis sera automatiquement retourné et des
+                frais supplémentaires pourront être appliqués.
+              </p>
+
+              <div class="cta-section">
+                <button
+                  class="cta-btn"
+                  onclick="
+                    alert(
+                      '📌 Astuce : en vrai, ce bouton mènerait vers un faux site de paiement. On en reparlera !',
+                    )
+                  "
+                >
+                  Régler mes frais de livraison →
+                </button>
+                <span class="cta-url"
+                  >→
+                  http://laposte-paiement-rapide.xyz/fr/checkout?ref=FR882341XP</span
+                >
+              </div>
+
+              <p style="font-size: 0.82rem; color: #8e8e93; margin-top: 1rem">
+                Cordialement,<br />
+                <strong>Le Service Clientèle La Poste</strong><br />
+                Numéro de dossier : #LPF-2026-882341
+              </p>
+            </div>
+
+            <div class="email-footer">
+              Ce message a été envoyé automatiquement par notre système de
+              notification. Merci de ne pas répondre directement à cet
+              e-mail.<br />
+              La Poste SA — 9 rue du Colonel Pierre Avia, 75015 Paris —
+              <em>laposte.fr</em>
+            </div>
+          </div>
         </div>
       </div>
+    </div>
 
-    </div>
-  </div>
-</div>
+    <!-- Bouton animateur discret -->
+    <button
+      class="animateur-btn"
+      onclick="document.getElementById('indices').classList.toggle('show')"
+    >
+      🔍 Révéler les indices
+    </button>
 
-<!-- Bouton animateur discret -->
-<button class="animateur-btn" onclick="document.getElementById('indices').classList.toggle('show')">
-  🔍 Révéler les indices
-</button>
-
-<!-- Panneau indices (révélé lors de la discussion) -->
-<div class="indices-panel" id="indices">
-  <button class="close-indices" onclick="document.getElementById('indices').classList.remove('show')">✕</button>
-  <div class="indices-title">🎯 Les 5 indices à faire trouver</div>
-  <div class="indices-grid">
-    <div class="indice">
-      <span class="indice-num">①</span>
-      <span><strong>L'adresse mail de l'expéditeur</strong> — <em>notifications-poste.com</em> et non <em>laposte.fr</em>. La Poste écrit toujours depuis @laposte.fr</span>
+    <!-- Panneau indices (révélé lors de la discussion) -->
+    <div class="indices-panel" id="indices">
+      <button
+        class="close-indices"
+        onclick="document.getElementById('indices').classList.remove('show')"
+      >
+        ✕
+      </button>
+      <div class="indices-title">🎯 Les 5 indices à faire trouver</div>
+      <div class="indices-grid">
+        <div class="indice">
+          <span class="indice-num">①</span>
+          <span
+            ><strong>L'adresse mail de l'expéditeur</strong> —
+            <em>notifications-poste.com</em> et non <em>laposte.fr</em>. La
+            Poste écrit toujours depuis @laposte.fr</span
+          >
+        </div>
+        <div class="indice">
+          <span class="indice-num">②</span>
+          <span
+            ><strong>L'URL du bouton</strong> —
+            <em>laposte-paiement-rapide.xyz</em> n'a rien d'officiel. Le vrai
+            site c'est laposte.fr, point.</span
+          >
+        </div>
+        <div class="indice">
+          <span class="indice-num">③</span>
+          <span
+            ><strong>L'URL du navigateur</strong> —
+            <em>laposte-espace-client.net</em> en haut de page. Pas .fr, pas
+            laposte.fr. Subtil mais faux.</span
+          >
+        </div>
+        <div class="indice">
+          <span class="indice-num">④</span>
+          <span
+            ><strong>L'urgence artificielle</strong> — "avant 23h59",
+            "retourné", "frais supplémentaires". Tout est fait pour paniquer et
+            ne pas réfléchir.</span
+          >
+        </div>
+        <div class="indice">
+          <span class="indice-num">⑤</span>
+          <span
+            ><strong>Le montant dérisoire</strong> — 2,49 € c'est fait pour que
+            ça semble sans risque. En réalité, ils récupèrent votre carte
+            bancaire.</span
+          >
+        </div>
+      </div>
     </div>
-    <div class="indice">
-      <span class="indice-num">②</span>
-      <span><strong>L'URL du bouton</strong> — <em>laposte-paiement-rapide.xyz</em> n'a rien d'officiel. Le vrai site c'est laposte.fr, point.</span>
-    </div>
-    <div class="indice">
-      <span class="indice-num">③</span>
-      <span><strong>L'URL du navigateur</strong> — <em>laposte-espace-client.net</em> en haut de page. Pas .fr, pas laposte.fr. Subtil mais faux.</span>
-    </div>
-    <div class="indice">
-      <span class="indice-num">④</span>
-      <span><strong>L'urgence artificielle</strong> — "avant 23h59", "retourné", "frais supplémentaires". Tout est fait pour paniquer et ne pas réfléchir.</span>
-    </div>
-    <div class="indice">
-      <span class="indice-num">⑤</span>
-      <span><strong>Le montant dérisoire</strong> — 2,49 € c'est fait pour que ça semble sans risque. En réalité, ils récupèrent votre carte bancaire.</span>
-    </div>
-  </div>
-</div>
-
-</body>
+  </body>
 </html>

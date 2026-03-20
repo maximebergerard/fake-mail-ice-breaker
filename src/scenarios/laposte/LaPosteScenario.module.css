@@ -5,7 +5,7 @@
   background: #f0f2f5;
 }
 
-/* ── Barre navigateur simulée ── */
+/* -- Barre navigateur simulée -- */
 .browserBar {
   background: #2b2b2b;
   padding: 0.6rem 1rem;
@@ -46,7 +46,7 @@
 /* La partie suspecte en orange discret — repérable mais pas criard */
 .urlHighlight { color: #ff9f43; }
 
-/* ── Client mail simulé ── */
+/* -- Client mail simulé -- */
 .mailApp {
   display: flex;
   flex: 1;
