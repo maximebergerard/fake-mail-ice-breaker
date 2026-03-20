@@ -1,0 +1,115 @@
+.controls {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  display: flex;
+  gap: 0.6rem;
+  z-index: 1000;
+}
+
+.backBtn {
+  background: #2c2c2e;
+  color: #aeaeb2;
+  border: 1px solid #3d3d3d;
+  border-radius: 2rem;
+  padding: 0.5rem 1.2rem;
+  font-size: 0.75rem;
+  cursor: pointer;
+  font-family: 'DM Sans', sans-serif;
+  transition: all 0.2s;
+}
+
+.backBtn:hover {
+  background: #3d3d3d;
+  color: white;
+}
+
+.triggerBtn {
+  background: #1c1c1e;
+  color: #aaa;
+  border: 1px solid #3d3d3d;
+  border-radius: 2rem;
+  padding: 0.5rem 1.2rem;
+  font-size: 0.75rem;
+  cursor: pointer;
+  font-family: 'DM Sans', sans-serif;
+  transition: all 0.2s;
+}
+
+.triggerBtn:hover {
+  background: #e74c3c;
+  color: white;
+  border-color: #e74c3c;
+}
+
+/* Fond semi-transparent derrière le panneau */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 998;
+  display: flex;
+  align-items: flex-end;
+}
+
+.panel {
+  position: relative;
+  width: 100%;
+  background: #1c1c1e;
+  color: white;
+  padding: 1.5rem 2rem 2rem;
+  border-top: 3px solid #e74c3c;
+  animation: slideUp 0.35s ease;
+  max-height: 60vh;
+  overflow-y: auto;
+}
+
+@keyframes slideUp {
+  from { transform: translateY(100%); }
+  to { transform: translateY(0); }
+}
+
+.closeBtn {
+  position: absolute;
+  top: 1rem;
+  right: 1.5rem;
+  background: none;
+  border: none;
+  color: #8e8e93;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+.panelTitle {
+  font-weight: 700;
+  color: #e74c3c;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 0.8rem;
+}
+
+.indice {
+  background: #2c2c2e;
+  border-radius: 8px;
+  padding: 0.8rem 1rem;
+  font-size: 0.82rem;
+  display: flex;
+  gap: 0.6rem;
+  align-items: flex-start;
+  line-height: 1.5;
+  border-left: 3px solid #e74c3c;
+}
+
+.num {
+  color: #e74c3c;
+  font-weight: 700;
+  flex-shrink: 0;
+  font-size: 0.9rem;
+}

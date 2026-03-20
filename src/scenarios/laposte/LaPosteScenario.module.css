@@ -1,0 +1,399 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background: #f0f2f5;
+}
+
+/* ── Barre navigateur simulée ── */
+.browserBar {
+  background: #2b2b2b;
+  padding: 0.6rem 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  flex-shrink: 0;
+}
+
+.browserDots {
+  display: flex;
+  gap: 5px;
+}
+
+.dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+
+.dotR { background: #ff5f57; }
+.dotY { background: #febc2e; }
+.dotG { background: #28c840; }
+
+.browserUrl {
+  flex: 1;
+  background: #3d3d3d;
+  border-radius: 6px;
+  padding: 0.35rem 0.8rem;
+  color: #ccc;
+  font-size: 0.82rem;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.urlText { color: #aaa; }
+/* La partie suspecte en orange discret — repérable mais pas criard */
+.urlHighlight { color: #ff9f43; }
+
+/* ── Client mail simulé ── */
+.mailApp {
+  display: flex;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+}
+
+/* Sidebar */
+.sidebar {
+  width: 220px;
+  background: #1c1c1e;
+  color: #aeaeb2;
+  padding: 1.5rem 0;
+  flex-shrink: 0;
+  overflow-y: auto;
+}
+
+.sidebarLogo {
+  padding: 0 1.2rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: white;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.sidebarItem {
+  padding: 0.55rem 1.2rem;
+  font-size: 0.85rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  transition: background 0.15s;
+}
+
+.sidebarItem.active {
+  background: #2c2c2e;
+  color: white;
+}
+
+.badge {
+  margin-left: auto;
+  background: #e74c3c;
+  color: white;
+  border-radius: 10px;
+  padding: 0.1rem 0.5rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+}
+
+/* Liste des mails */
+.mailList {
+  width: 300px;
+  background: #ffffff;
+  border-right: 1px solid #e5e5ea;
+  overflow-y: auto;
+  flex-shrink: 0;
+}
+
+.mailListHeader {
+  padding: 1rem 1.2rem 0.8rem;
+  border-bottom: 1px solid #e5e5ea;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #8e8e93;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.mailItem {
+  padding: 0.9rem 1.2rem;
+  border-bottom: 1px solid #f2f2f7;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.mailItem:hover { background: #f9f9fb; }
+
+.mailItem.activeItem {
+  background: #e8f0fe;
+  border-left: 3px solid #e74c3c;
+}
+
+.mailSender {
+  font-size: 0.88rem;
+  color: #3a3a3c;
+  margin-bottom: 0.2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.mailItem.unread .mailSender {
+  font-weight: 600;
+  color: #1c1c1e;
+}
+
+.senderWithDot {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.mailDateSmall {
+  font-size: 0.72rem;
+  color: #8e8e93;
+  font-weight: 400;
+  white-space: nowrap;
+}
+
+.mailSubjectSmall {
+  font-size: 0.82rem;
+  color: #3a3a3c;
+  margin-bottom: 0.15rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.mailPreview {
+  font-size: 0.78rem;
+  color: #8e8e93;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.unreadDot {
+  width: 8px;
+  height: 8px;
+  background: #e74c3c;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+/* Corps du mail */
+.mailContent {
+  flex: 1;
+  background: #ffffff;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.mailToolbar {
+  padding: 0.8rem 2rem;
+  border-bottom: 1px solid #e5e5ea;
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.toolbarBtn {
+  background: none;
+  border: 1px solid #d1d1d6;
+  border-radius: 6px;
+  padding: 0.35rem 0.9rem;
+  font-size: 0.8rem;
+  cursor: pointer;
+  color: #3a3a3c;
+  font-family: 'DM Sans', sans-serif;
+  transition: background 0.15s;
+}
+
+.toolbarBtn:hover { background: #f2f2f7; }
+
+.mailBody {
+  padding: 2.5rem 3rem;
+  max-width: 700px;
+}
+
+.mailSubject {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #1c1c1e;
+  margin-bottom: 1.2rem;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+
+.urgentTag {
+  background: #e74c3c;
+  color: white;
+  font-size: 0.7rem;
+  padding: 0.2rem 0.6rem;
+  border-radius: 4px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.mailMeta {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.8rem;
+  margin-bottom: 2rem;
+  padding-bottom: 1.2rem;
+  border-bottom: 1px solid #f2f2f7;
+}
+
+.senderAvatar {
+  width: 40px;
+  height: 40px;
+  background: #e8f5e9;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  flex-shrink: 0;
+}
+
+.senderInfo { flex: 1; }
+
+.senderName {
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: #1c1c1e;
+}
+
+/* L'adresse email est suspecte mais pas hurlante */
+.senderEmail {
+  font-size: 0.78rem;
+  color: #8e8e93;
+  margin-top: 0.1rem;
+}
+
+.mailDate {
+  font-size: 0.78rem;
+  color: #8e8e93;
+}
+
+/* Corps du mail */
+.emailContainer {
+  background: #f9f9f9;
+  border: 1px solid #e5e5ea;
+  border-radius: 8px;
+  overflow: hidden;
+  font-size: 0.9rem;
+  line-height: 1.7;
+  color: #3a3a3c;
+}
+
+.emailHeaderBand {
+  background: #ffffff;
+  padding: 1.5rem 2rem 1rem;
+  border-bottom: 3px solid #f5a623;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+/* Logo La Poste approximatif — couleur jaune/or légèrement différente du vrai */
+.laposteLogo {
+  background: #f5a623;
+  color: white;
+  font-weight: 800;
+  font-size: 0.85rem;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.laposteTagline {
+  font-size: 0.75rem;
+  color: #8e8e93;
+  font-style: italic;
+}
+
+.emailBody {
+  padding: 2rem;
+}
+
+.emailBody p {
+  margin-bottom: 1rem;
+  font-size: 0.88rem;
+}
+
+.emailAlertBox {
+  background: #fff3cd;
+  border: 1px solid #ffc107;
+  border-left: 4px solid #e74c3c;
+  border-radius: 6px;
+  padding: 1rem 1.2rem;
+  margin-bottom: 1.5rem;
+  font-size: 0.88rem;
+}
+
+.emailAlertBox strong {
+  display: block;
+  margin-bottom: 0.3rem;
+  color: #c0392b;
+}
+
+.highlight {
+  font-weight: 600;
+  color: #c0392b;
+}
+
+/* Bouton CTA — le vrai piège */
+.ctaSection {
+  text-align: center;
+  padding: 1.5rem 0;
+}
+
+.ctaBtn {
+  display: inline-block;
+  background: #f5a623;
+  color: white;
+  padding: 0.9rem 2.5rem;
+  border-radius: 6px;
+  font-weight: 700;
+  font-size: 0.95rem;
+  cursor: pointer;
+  font-family: 'DM Sans', sans-serif;
+  border: none;
+  transition: filter 0.2s;
+}
+
+.ctaBtn:hover { filter: brightness(1.08); }
+
+/* L'URL sous le bouton — très suspecte si on la lit */
+.ctaUrl {
+  display: block;
+  margin-top: 0.5rem;
+  font-size: 0.7rem;
+  color: #aaa;
+}
+
+.signoff {
+  font-size: 0.82rem;
+  color: #8e8e93;
+  margin-top: 1rem;
+}
+
+.emailFooter {
+  background: #f2f2f7;
+  padding: 1rem 2rem;
+  font-size: 0.72rem;
+  color: #8e8e93;
+  line-height: 1.6;
+  border-top: 1px solid #e5e5ea;
+}
