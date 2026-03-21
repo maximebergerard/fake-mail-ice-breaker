@@ -50,6 +50,8 @@ const SECTIONS = [
           { name: "ChatGPT", url: "https://chat.openai.com" },
           { name: "Claude", url: "https://claude.ai" },
           { name: "Gemini", url: "https://gemini.google.com" },
+          { name: "Suno", url: "https://suno.com" },
+          { name: "MagicSchool", url: "https://www.magicschool.ai" },
         ],
       },
       {
