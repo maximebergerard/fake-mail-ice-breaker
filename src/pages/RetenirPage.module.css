@@ -1,0 +1,278 @@
+.page {
+  min-height: 100vh;
+  background: #f9f9fb;
+  font-family: 'DM Sans', sans-serif;
+  color: #1c1c1e;
+}
+
+/* ── Header ── */
+.header {
+  background: #1c1c1e;
+  padding: 2rem 1.5rem 1.5rem;
+  text-align: center;
+}
+
+.session {
+  font-size: 0.78rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #636366;
+  margin-bottom: 0.4rem;
+}
+
+.title {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: white;
+  margin: 0;
+}
+
+/* ── Main ── */
+.main {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 1.5rem 1rem 3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+/* ── Section ── */
+.section {
+  background: white;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+}
+
+.sectionHeader {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 1rem 1.2rem 0.8rem;
+  border-bottom: 1px solid #f2f2f7;
+}
+
+.sectionIcon {
+  font-size: 1.3rem;
+  line-height: 1;
+}
+
+.sectionTitle {
+  font-size: 1rem;
+  font-weight: 700;
+  margin: 0;
+  color: #1c1c1e;
+}
+
+/* ── Block (sub-section) ── */
+.block {
+  padding: 0.9rem 1.2rem;
+  border-bottom: 1px solid #f2f2f7;
+}
+
+.block:last-child {
+  border-bottom: none;
+}
+
+.blockHeading {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: #8e8e93;
+  margin-bottom: 0.6rem;
+}
+
+/* ── Item list (signaux / règles) ── */
+.itemList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.item {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.2rem 0.4rem;
+  font-size: 0.85rem;
+  line-height: 1.4;
+}
+
+.itemLabel {
+  font-weight: 600;
+  color: #1c1c1e;
+}
+
+.itemValue {
+  color: #636366;
+}
+
+/* ── Bullets ── */
+.bullets {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.bullets li {
+  font-size: 0.85rem;
+  line-height: 1.5;
+  padding-left: 1rem;
+  position: relative;
+  color: #3a3a3c;
+}
+
+.bullets li::before {
+  content: '·';
+  position: absolute;
+  left: 0;
+  color: #8e8e93;
+  font-weight: 700;
+}
+
+/* ── Tool links (ChatGPT, Claude, etc.) ── */
+.linkList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.toolLink {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  text-decoration: none;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: #1c1c1e;
+  background: #f2f2f7;
+  padding: 0.5rem 0.8rem;
+  border-radius: 8px;
+  transition: background 0.15s;
+}
+
+.toolLink:hover {
+  background: #e5e5ea;
+}
+
+.linkUrl {
+  font-size: 0.75rem;
+  font-weight: 400;
+  color: #8e8e93;
+}
+
+/* ── Resource link ── */
+.resourceLink {
+  display: inline-block;
+  text-decoration: none;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: #1c7abf;
+  background: rgba(28, 122, 191, 0.08);
+  padding: 0.5rem 0.9rem;
+  border-radius: 8px;
+  border: 1px solid rgba(28, 122, 191, 0.2);
+  transition: background 0.15s;
+}
+
+.resourceLink:hover {
+  background: rgba(28, 122, 191, 0.14);
+}
+
+/* ── Lexique table ── */
+.tableWrapper {
+  overflow-x: auto;
+  padding: 0.5rem 1.2rem 1rem;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+}
+
+.table th {
+  text-align: left;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: #8e8e93;
+  padding: 0 0.4rem 0.6rem;
+  border-bottom: 1px solid #e5e5ea;
+}
+
+.table td {
+  padding: 0.5rem 0.4rem;
+  border-bottom: 1px solid #f2f2f7;
+  vertical-align: top;
+  color: #3a3a3c;
+  line-height: 1.4;
+}
+
+.table tr:last-child td {
+  border-bottom: none;
+}
+
+.tableWord {
+  font-weight: 600;
+  color: #1c1c1e;
+  white-space: nowrap;
+  padding-right: 0.8rem !important;
+}
+
+/* ── Takeaway section ── */
+.takeawaySection {
+  background: #1c1c1e;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+}
+
+.takeawaySection .sectionHeader {
+  border-bottom-color: #2c2c2e;
+}
+
+.takeawaySection .sectionTitle {
+  color: white;
+}
+
+.takeaway {
+  padding: 0.9rem 1.2rem;
+  border-bottom: 1px solid #2c2c2e;
+}
+
+.takeaway:last-child {
+  border-bottom: none;
+}
+
+.takeawayTopic {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: #636366;
+  margin-bottom: 0.3rem;
+}
+
+.takeawayText {
+  font-size: 0.9rem;
+  color: #aeaeb2;
+  line-height: 1.5;
+}
+
+/* ── Footer ── */
+.footer {
+  text-align: center;
+  padding: 1.5rem;
+  font-size: 0.78rem;
+  color: #c7c7cc;
+}

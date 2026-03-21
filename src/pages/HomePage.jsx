@@ -1,4 +1,6 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
+import QrModal from "../components/QrModal.jsx";
 import styles from "./HomePage.module.css";
 
 // Chaque scénario décrit une arnaque à faire deviner au groupe.
@@ -103,8 +105,11 @@ const DIFFICULTY_COLOR = {
 };
 
 export default function HomePage() {
+  const [showQr, setShowQr] = useState(false);
+
   return (
     <div className={styles.page}>
+      {showQr && <QrModal onClose={() => setShowQr(false)} />}
       <header className={styles.header}>
         <div className={styles.headerInner}>
           <div className={styles.logo}>🎭</div>
@@ -122,6 +127,9 @@ export default function HomePage() {
           groupe trouver les indices. Le bouton <em>"Révéler les indices"</em>{" "}
           en bas à droite est réservé à l'animateur.
         </div>
+        <button className={styles.qrBtn} onClick={() => setShowQr(true)}>
+          📱 QR Code mémo participants
+        </button>
       </header>
 
       <main className={styles.main}>

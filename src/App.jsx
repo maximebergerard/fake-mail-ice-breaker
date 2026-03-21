@@ -8,11 +8,13 @@ import FacebookArnaque from './scenarios/facebook-arnaque/FacebookArnaque.jsx'
 import WhatsappLucas from './scenarios/whatsapp-lucas/WhatsappLucas.jsx'
 import SmsBanquePostale from './scenarios/sms-banque-postale/SmsBanquePostale.jsx'
 import WhatsappFamille from './scenarios/whatsapp-famille/WhatsappFamille.jsx'
+import RetenirPage from './pages/RetenirPage.jsx'
 
 export default function App() {
   return (
     <Routes>
       <Route path="/" element={<HomePage />} />
+      <Route path="/retenir" element={<RetenirPage />} />
       <Route path="/laposte" element={<LaPosteScenario />} />
       <Route path="/laposte/paiement" element={<LaPostePayment />} />
       <Route path="/sms-laposte" element={<SmsLaposte />} />
