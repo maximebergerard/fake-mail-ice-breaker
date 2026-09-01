@@ -200,11 +200,6 @@ export default function WhatsappGroupe() {
     return () => clearInterval(timer)
   }, [isPlaying, isDone])
 
-  // Stop when done
-  useEffect(() => {
-    if (isDone) setIsPlaying(false)
-  }, [isDone])
-
   function handleStart() {
     setStep(1)
     setIsPlaying(true)

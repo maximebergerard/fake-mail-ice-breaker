@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Formulaires Netlify</title>
+  </head>
+  <body>
+    <!--
+      Ce fichier n'est jamais affiché aux visiteurs.
+      Il sert uniquement à Netlify pour détecter le formulaire au moment du build,
+      car le formulaire réel est rendu par React (donc invisible pour le crawler).
+      Tout champ ajouté dans ContactPage.jsx doit être ajouté ici aussi.
+    -->
+    <form name="contact" data-netlify="true" netlify-honeypot="bot-field" hidden>
+      <input type="hidden" name="form-name" value="contact" />
+      <input type="text" name="bot-field" />
+      <input type="text" name="nom" />
+      <input type="email" name="email" />
+      <input type="text" name="structure" />
+      <select name="sujet">
+        <option value="Organiser un atelier">Organiser un atelier</option>
+        <option value="Une question">Une question</option>
+        <option value="Autre">Autre</option>
+      </select>
+      <textarea name="message"></textarea>
+    </form>
+  </body>
+</html>

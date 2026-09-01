@@ -41,10 +41,10 @@ export default function Layout({ children }) {
             <button className="font-toggle-btn" style={{ color: 'var(--c-text-2)' }} onClick={toggleFont} title="Taille du texte">
               {large ? 'A−' : 'A+'}
             </button>
-            <a href="mailto:maxime.bergerard@gmail.com" className={styles.contactBtn}>
+            <Link to="/contact" className={styles.contactBtn}>
               <Mail size={14} />
               Me contacter
-            </a>
+            </Link>
           </nav>
 
           <button
@@ -71,13 +71,13 @@ export default function Layout({ children }) {
                 {label}
               </NavLink>
             ))}
-            <a
-              href="mailto:maxime.bergerard@gmail.com"
+            <Link
+              to="/contact"
               className={styles.mobileContactBtn}
               onClick={() => setMenuOpen(false)}
             >
               Me contacter
-            </a>
+            </Link>
           </nav>
         )}
       </header>
@@ -90,9 +90,9 @@ export default function Layout({ children }) {
             <Coffee size={14} />
             Cafés numériques
           </span>
-          <a href="mailto:maxime.bergerard@gmail.com" className={styles.footerMail}>
-            maxime.bergerard@gmail.com
-          </a>
+          <Link to="/contact" className={styles.footerMail}>
+            Me contacter
+          </Link>
         </div>
       </footer>
     </div>

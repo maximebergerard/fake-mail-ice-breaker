@@ -73,12 +73,9 @@ export default function HomePage() {
               jargon, sans jugement, en petit groupe.
             </p>
             <div className={styles.heroCtas}>
-              <a
-                href="mailto:maxime.bergerard@gmail.com"
-                className={styles.ctaPrimary}
-              >
+              <Link to="/contact" className={styles.ctaPrimary}>
                 Organiser un atelier
-              </a>
+              </Link>
               <Link to="/ateliers" className={styles.ctaSecondary}>
                 Découvrir le format →
               </Link>
@@ -178,12 +175,9 @@ export default function HomePage() {
               Que ce soit pour une association, une mairie, une bibliothèque ou
               un groupe informel - contactez-moi pour en discuter.
             </p>
-            <a
-              href="mailto:maxime.bergerard@gmail.com"
-              className={styles.ctaPrimary}
-            >
+            <Link to="/contact" className={styles.ctaPrimary}>
               Écrire à Maxime
-            </a>
+            </Link>
           </div>
         </section>
       </div>

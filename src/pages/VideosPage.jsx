@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import { Video } from 'lucide-react'
 import Layout from '../components/Layout.jsx'
 import styles from './AteliersPage.module.css'
@@ -19,9 +20,9 @@ export default function VideosPage() {
             <p className={styles.subdesc}>
               Cette section est en cours de construction. Les premières vidéos arrivent bientôt.
             </p>
-            <a href="mailto:maxime.bergerard@gmail.com" className={styles.contactBtn}>
+            <Link to="/contact" className={styles.contactBtn}>
               Me contacter
-            </a>
+            </Link>
           </div>
 
         </div>
